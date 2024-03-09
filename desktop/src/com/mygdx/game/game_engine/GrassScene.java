@@ -4,15 +4,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GrassScene extends Scene {
 
-    public GrassScene() {
-        super("Scenes/grassCute.jpg");
+    public GrassScene(EntityManager entityManager) {
+        super("Scenes/grassCute.jpg", entityManager);
     }
 
     @Override
-    public void renderBackground(SpriteBatch batch) {
-        super.renderBackground(batch);
-        // You can add more rendering logic specific to the mountain scene here
+    public void render(SpriteBatch batch) {
+        super.render(batch);
+        // Add more rendering logic specific to the grass scene here
     }
 
-    // Add other methods specific to the mountain scene if necessary
+    // Add other methods specific to the grass scene if necessary
 }

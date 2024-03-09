@@ -27,7 +27,7 @@ public class GameManager extends Game {
         sceneManager = new SceneManager();
 
         // Initialize the start scene and add it to the scene manager
-        StartScene startScene = new StartScene();
+        StartScene startScene = new StartScene(entityManager);
         sceneManager.addScene(startScene);
         sceneManager.setCurrentScene(startScene);
 
@@ -41,31 +41,65 @@ public class GameManager extends Game {
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 // Switch to the MountainScene on any touch/click release
-                sceneManager.setCurrentScene(new GrassScene());
+                sceneManager.setCurrentScene(new GrassScene(entityManager));
                 return true; // Return true to indicate the event was handled
             }
         });
+
+        // Create food entities with the path to your images
+        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
+        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
+        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
+        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
+        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
+        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
+
+        // ... and so on for the rest of your food items
+
+        // Add them to the EntityManager
+        entityManager.addEntity(burger);
+        entityManager.addEntity(frenchFries);
+        entityManager.addEntity(pizza);
+        entityManager.addEntity(hotDog);
+        entityManager.addEntity(cookedChicken);
+        entityManager.addEntity(salad);
+        // ... and so on for the rest of your food items
+
     }
 
     @Override
     public void render() {
         super.render();
-        // Render the current scene
+
         batch.begin();
+
         Scene currentScene = sceneManager.getCurrentScene();
         if (currentScene != null) {
-            currentScene.renderBackground(batch);
+            currentScene.render(batch);
         }
+
         batch.end();
     }
 
     @Override
     public void dispose() {
+        // Dispose of the current scene
         if (sceneManager.getCurrentScene() != null) {
             sceneManager.getCurrentScene().dispose();
         }
-        batch.dispose();
-        music.dispose();
+
+        // Dispose of the entities
+        if (entityManager != null) {
+            entityManager.dispose();
+        }
+
+        // Dispose of batch and music
+        if (batch != null) {
+            batch.dispose();
+        }
+        if (music != null) {
+            music.dispose();
+        }
     }
 
     // Getter for SceneManager for potential external use

@@ -18,5 +18,15 @@ public class EntityManager {
         entitiesList.remove(entity);
     }
 
-    // You can add more methods for managing entities as needed
+    public List<Entities> getEntitiesList() {
+        return entitiesList; // This method was missing and needs to be added
+    }
+
+    public void dispose() {
+        for (Entities entity : entitiesList) {
+            entity.dispose();
+        }
+    }
+
+    // ... any additional methods ...
 }

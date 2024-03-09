@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StartScene extends Scene {
 
-    public StartScene() {
-        super("Scenes/mainMenu.jpg");
+    public StartScene(EntityManager entityManager) {
+        super("Scenes/mainMenu.jpg", entityManager);
     }
 
     @Override
-    public void renderBackground(SpriteBatch batch) {
-        super.renderBackground(batch);
-        // You can add more rendering logic specific to the start scene here
+    public void render(SpriteBatch batch) {
+        super.render(batch);
+        // Add more rendering logic specific to the start scene here
     }
 
     // Add other methods specific to the start scene if necessary
