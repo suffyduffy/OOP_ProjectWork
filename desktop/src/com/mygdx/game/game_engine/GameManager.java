@@ -94,15 +94,19 @@ public class GameManager extends Game {
     public void render() {
         super.render();
 
-        update(Gdx.graphics.getDeltaTime());
+        float deltaTime = Gdx.graphics.getDeltaTime();
+        update(deltaTime);
 
         batch.begin();
         Scene currentScene = sceneManager.getCurrentScene();
         if (currentScene != null) {
             currentScene.render(batch);
         }
+        aiControlManager.update(deltaTime);  // Now AIControlManager has its own update logic
+        aiControlManager.render(batch);      // Delegate rendering of AI entities to AIControlManager
         batch.end();
     }
+
 
     private void update(float deltaTime) {
         Scene currentScene = sceneManager.getCurrentScene();
@@ -137,6 +141,7 @@ public class GameManager extends Game {
                 }
             }
         }
+        aiControlManager.update(deltaTime);
     }
 
 
