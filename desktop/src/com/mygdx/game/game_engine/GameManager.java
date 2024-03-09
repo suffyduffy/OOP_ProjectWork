@@ -65,6 +65,13 @@ public class GameManager extends Game {
         entityManager.addEntity(salad);
         // ... and so on for the rest of your food items
 
+        // ... scaling down food sizes...
+        cookedChicken.setScaleFactor(0.25f); // scale down to half size
+        salad.setScaleFactor(0.5f);
+        frenchFries.setScaleFactor(0.5f);
+        pizza.setScaleFactor(0.25f);
+        burger.setScaleFactor(0.25f);
+        hotDog.setScaleFactor(0.5f);
     }
 
     @Override
