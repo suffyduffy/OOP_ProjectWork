@@ -1,10 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.game_engine;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.game_layer.PlayerControlManager;
 
 public class GameManager extends Game {
 

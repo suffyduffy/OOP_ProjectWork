@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.game_engine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mygdx.game.TexturedObject;
+import com.mygdx.game.game_layer.TexturedObject;
 
 public class InputOutputManager {
     private List<TexturedObject> texturedObjects;

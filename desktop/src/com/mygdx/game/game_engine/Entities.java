@@ -1,10 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.game_engine;
 
-import com.mygdx.game.TexturedObject;
+import com.mygdx.game.game_layer.TexturedObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entities {
+public abstract class Entities {
     private List<TexturedObject> texturedObjects;
 
     public Entities() {
@@ -25,4 +25,6 @@ public class Entities {
     public List<TexturedObject> getTexturedObjects() {
         return texturedObjects;
     }
+
+    // Any other methods you might have in this class would go here
 }

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.game_layer;
 
 public class TexturedObject {
     private String texturePath;

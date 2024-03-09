@@ -1,6 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.game_layer;
 
-import com.mygdx.game.InputOutputManager;
+import com.mygdx.game.game_engine.InputOutputManager;
 
 public class PlayerControlManager {
     private InputOutputManager inputOutputManager;
