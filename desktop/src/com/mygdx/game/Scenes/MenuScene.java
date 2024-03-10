@@ -39,7 +39,7 @@ public class MenuScene extends Scene {
                 Gdx.app.log("Start Game", "Clicked");
                 if (sceneManager != null) {
                     // Replace "GrassScene" with the name of the scene class you want to switch to
-                    sceneManager.setCurrentScene(new GrassScene(entityManager));
+                    sceneManager.setCurrentScene(new GameScene(entityManager));
                 }
             }
         });

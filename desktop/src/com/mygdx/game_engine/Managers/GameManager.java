@@ -2,15 +2,12 @@ package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game_engine.Managers.PlayerControlManager;
 import com.mygdx.game.Objects.Entities;
 import com.mygdx.game.Objects.HealthyFoodItem;
 import com.mygdx.game.Objects.TexturedObject;
 import com.mygdx.game.Objects.UnhealthyFoodItem;
-import com.mygdx.game.Scenes.GrassScene;
 import com.mygdx.game.Scenes.MenuScene;
 import com.mygdx.game.Scenes.Scene;
 

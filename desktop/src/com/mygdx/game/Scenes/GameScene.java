@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_engine.Managers.EntityManager;
 
-public class GrassScene extends Scene {
+public class GameScene extends Scene {
 
-    public GrassScene(EntityManager entityManager) {
+    public GameScene(EntityManager entityManager) {
         super("Scenes/grassCute.jpg", entityManager);
         Gdx.app.log("GrassScene", "Constructor called");
     }
