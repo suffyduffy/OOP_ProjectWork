@@ -21,12 +21,6 @@ public class GameManager extends Game {
     private SpriteBatch batch;
     private Music music;
 
-    // Timing and entities appearance control
-    private float timeSinceLastEntity = 0f;
-    private float timeBetweenEntities = 2f; // 1 second between entities
-    private int nextEntityIndex = 0;
-    private List<Entities> allEntities = new ArrayList<>();
-
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -57,38 +51,18 @@ public class GameManager extends Game {
         });
 
         // Prepare all entities
-        prepareEntities();
+        aiControlManager.prepareAIEntities();
+//        prepareEntities();
+
+        AIControlManager aiControlManager = new AIControlManager();
+        aiControlManager.prepareAIEntities();
+
+        if (aiControlManager.controlledEntities.size() == 6) {
+            System.out.println("All food entities are in the controlled list.");
+        } else {
+            System.out.println("Some entities are missing from the controlled list.");
+        }
     }
-
-    private void prepareEntities() {
-        // Create and add all entities to the allEntities list with their respective scale factors
-        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
-        burger.setScaleFactor(0.25f);
-        allEntities.add(burger);
-
-        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
-        frenchFries.setScaleFactor(0.5f);
-        allEntities.add(frenchFries);
-
-        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
-        pizza.setScaleFactor(0.25f);
-        allEntities.add(pizza);
-
-        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
-        hotDog.setScaleFactor(0.5f);
-        allEntities.add(hotDog);
-
-        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
-        cookedChicken.setScaleFactor(0.25f);
-        allEntities.add(cookedChicken);
-
-        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
-        salad.setScaleFactor(0.5f);
-        allEntities.add(salad);
-
-        // Add more entities as needed
-    }
-
 
     @Override
     public void render() {
@@ -113,13 +87,13 @@ public class GameManager extends Game {
 
         // Check if the current scene is not StartScene before adding entities
         if (!(currentScene instanceof StartScene)) {
-            timeSinceLastEntity += deltaTime;
+            aiControlManager.timeSinceLastEntity += deltaTime;
 
             // Check if it's time to add the next entity
-            if (timeSinceLastEntity >= timeBetweenEntities && nextEntityIndex < allEntities.size()) {
-                Entities entity = allEntities.get(nextEntityIndex++);
+            if (aiControlManager.timeSinceLastEntity >= aiControlManager.timeBetweenEntities && aiControlManager.nextEntityIndex < aiControlManager.controlledEntities.size()) {
+                Entities entity = aiControlManager.controlledEntities.get(aiControlManager.nextEntityIndex++);
                 entityManager.addEntity(entity);
-                timeSinceLastEntity = 0f;
+                aiControlManager.timeSinceLastEntity = 0f;
             }
         }
 
