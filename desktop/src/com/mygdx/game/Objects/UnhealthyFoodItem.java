@@ -1,10 +1,11 @@
-package com.mygdx.game.game_engine;
+package com.mygdx.game.Objects;
 
-import com.mygdx.game.game_layer.TexturedObject;
+import com.mygdx.game.Objects.TexturedObject;
 
-public class HealthyFoodItem extends Entities {
-    private float scaleFactor = 1.0f;
-    public HealthyFoodItem(String texturePath) {
+public class UnhealthyFoodItem extends Entities {
+    private float scaleFactor = 1.0f; // default scale is 1.0 (no scaling)
+
+    public UnhealthyFoodItem(String texturePath) {
         super();
         addTexturedObject(new TexturedObject(texturePath));
     }
@@ -17,4 +18,3 @@ public class HealthyFoodItem extends Entities {
         return scaleFactor;
     }
 }
-

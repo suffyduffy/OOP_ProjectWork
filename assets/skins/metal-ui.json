@@ -1,0 +1,250 @@
+{
+BitmapFont: {
+	font: {
+		file: font-export.fnt
+	}
+}
+Color: {
+	black: {
+		r: 0
+		g: 0
+		b: 0
+		a: 1
+	}
+	red: {
+		r: 1
+		g: 0
+		b: 0
+		a: 1
+	}
+	white: {
+		r: 1
+		g: 1
+		b: 1
+		a: 1
+	}
+}
+TintedDrawable: {
+	black: {
+		name: white
+		color: {
+			r: 0
+			g: 0
+			b: 0
+			a: 1
+		}
+	}
+	cyan: {
+		name: white
+		color: {
+			r: 0.5807556
+			g: 0.97333336
+			b: 0.9700618
+			a: 1
+		}
+	}
+}
+ButtonStyle: {
+	default: {
+		up: button
+		down: button-pressed
+		over: button-over
+	}
+	toggle: {
+		up: button
+		down: button-pressed
+		over: button-over
+		checked: button-pressed
+	}
+	spinner-up: {
+		up: spinner-up
+		down: spinner-up-pressed
+		over: spinner-up-over
+	}
+	spinner-down: {
+		up: spinner-down
+		down: spinner-down-pressed
+		over: spinner-down-over
+	}
+	close: {
+		up: close
+		down: close-down
+	}
+}
+CheckBoxStyle: {
+	default: {
+		checkboxOn: checkbox-on
+		checkboxOff: checkbox
+		checkboxOver: checkbox-over
+		font: font
+		fontColor: black
+	}
+	radio: {
+		checkboxOn: radio-on
+		checkboxOff: radio
+		checkboxOver: radio-over
+		font: font
+		fontColor: black
+	}
+}
+ImageButtonStyle: {
+	default: {
+		up: button
+		down: button-pressed
+		over: button-over
+	}
+}
+ImageTextButtonStyle: {
+	default: {
+		font: font
+		fontColor: black
+		up: button
+		down: button-pressed
+		over: button-over
+	}
+	radio: {
+		imageUp: radio
+		imageOver: radio-over
+		imageChecked: radio-on
+		imageCheckedOver: radio-on-hover
+		font: font
+		fontColor: black
+	}
+	checkbox: {
+		imageUp: checkbox
+		imageOver: checkbox-over
+		imageChecked: checkbox-on
+		imageCheckedOver: checkbox-on-over
+		font: font
+		fontColor: black
+	}
+}
+LabelStyle: {
+	default: {
+		font: font
+		fontColor: black
+	}
+	white: {
+		font: font
+		fontColor: white
+	}
+	red: {
+		font: font
+		fontColor: red
+	}
+	page: {
+		font: font
+		fontColor: black
+		background: page
+	}
+}
+ListStyle: {
+	default: {
+		font: font
+		fontColorSelected: black
+		fontColorUnselected: black
+		selection: selection
+		background: list
+	}
+}
+ProgressBarStyle: {
+	default-horizontal: {
+		background: progress-bar
+		knobBefore: progress-bar-knob
+	}
+	default-vertical: {
+		background: progress-bar-vertical
+		knobBefore: progress-bar-vertical-knob
+	}
+}
+ScrollPaneStyle: {
+	default: {
+		hScroll: scrollbar-h
+		hScrollKnob: scrollbar-h-knob
+		vScroll: scrollbar-v
+		vScrollKnob: scrollbar-v-knob
+	}
+}
+SelectBoxStyle: {
+	default: {
+		font: font
+		fontColor: black
+		background: select-box
+		scrollStyle: default
+		listStyle: default
+		backgroundOpen: select-box-pressed
+	}
+}
+SliderStyle: {
+	default-horizontal: {
+		background: slider-h
+		knob: slider-h-knob
+		knobBefore: slider-h-before-knob
+	}
+	default-vertical: {
+		background: slider-v
+		knob: slider-v-knob
+		knobBefore: slider-v-before-knob
+	}
+}
+SplitPaneStyle: {
+	default-horizontal: {
+		handle: split-pane-h
+	}
+	default-vertical: {
+		handle: split-pane-v
+	}
+}
+TextButtonStyle: {
+	default: {
+		font: font
+		fontColor: black
+		up: button
+		down: button-pressed
+		over: button-over
+	}
+	toggle: {
+		font: font
+		fontColor: black
+		up: button
+		down: button-pressed
+		over: button-over
+		checked: button-pressed
+	}
+}
+TextFieldStyle: {
+	default: {
+		font: font
+		fontColor: black
+		background: rect
+		cursor: black
+		selection: cyan
+	}
+}
+TextTooltipStyle: {
+	default: {
+		label: default
+		background: rect
+	}
+}
+TouchpadStyle: {
+	default: {
+		background: rect
+		knob: rect
+	}
+}
+TreeStyle: {
+	default: {
+		plus: folder
+		minus: folder
+		selection: selection
+	}
+}
+WindowStyle: {
+	default: {
+		background: window
+		titleFont: font
+		titleFontColor: black
+	}
+}
+}

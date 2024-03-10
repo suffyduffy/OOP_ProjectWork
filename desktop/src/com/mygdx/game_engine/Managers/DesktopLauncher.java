@@ -1,8 +1,8 @@
-package com.mygdx.game.game_layer;
+package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.game.game_engine.GameManager;
+import com.mygdx.game_engine.Managers.GameManager;
 
 public class DesktopLauncher {
 	public static void main(String[] arg) {

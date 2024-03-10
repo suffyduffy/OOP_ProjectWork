@@ -1,12 +1,19 @@
-package com.mygdx.game.game_engine;
+package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.game_layer.PlayerControlManager;
-import com.mygdx.game.game_layer.TexturedObject;
+import com.mygdx.game_engine.Managers.PlayerControlManager;
+import com.mygdx.game.Objects.Entities;
+import com.mygdx.game.Objects.HealthyFoodItem;
+import com.mygdx.game.Objects.TexturedObject;
+import com.mygdx.game.Objects.UnhealthyFoodItem;
+import com.mygdx.game.Scenes.GrassScene;
+import com.mygdx.game.Scenes.MenuScene;
+import com.mygdx.game.Scenes.Scene;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,9 +44,9 @@ public class GameManager extends Game {
         sceneManager = new SceneManager();
 
         // Initialize the start scene and add it to the scene manager
-        StartScene startScene = new StartScene(entityManager);
-        sceneManager.addScene(startScene);
-        sceneManager.setCurrentScene(startScene);
+        MenuScene menuScene = new MenuScene(entityManager);
+        sceneManager.addScene(menuScene);
+        sceneManager.setCurrentScene(menuScene);
 
         // Load and play music
         music = Gdx.audio.newMusic(Gdx.files.internal("Music/Hey Kids Remake.WAV"));
@@ -47,14 +54,14 @@ public class GameManager extends Game {
         music.play();
 
         // Set up input processor to listen for touch input
-        Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                // Switch to the GrassScene on any touch/click release
-                sceneManager.setCurrentScene(new GrassScene(entityManager));
-                return true;
-            }
-        });
+//        Gdx.input.setInputProcessor(new InputAdapter() {
+//            @Override
+//            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+//                // Switch to the GrassScene on any touch/click release
+//                sceneManager.setCurrentScene(new GrassScene(entityManager));
+//                return true;
+//            }
+//        });
 
         // Prepare all entities
         prepareEntities();
@@ -108,7 +115,7 @@ public class GameManager extends Game {
         Scene currentScene = sceneManager.getCurrentScene();
 
         // Check if the current scene is not StartScene before adding entities
-        if (!(currentScene instanceof StartScene)) {
+        if (!(currentScene instanceof MenuScene)) {
             timeSinceLastEntity += deltaTime;
 
             // Check if it's time to add the next entity

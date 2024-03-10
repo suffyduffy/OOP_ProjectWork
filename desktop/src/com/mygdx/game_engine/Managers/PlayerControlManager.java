@@ -1,6 +1,6 @@
-package com.mygdx.game.game_layer;
+package com.mygdx.game_engine.Managers;
 
-import com.mygdx.game.game_engine.InputOutputManager;
+import com.mygdx.game.Objects.TexturedObject;
 
 public class PlayerControlManager {
     private InputOutputManager inputOutputManager;
@@ -8,7 +8,6 @@ public class PlayerControlManager {
 
     public PlayerControlManager(InputOutputManager inputOutputManager) {
         this.inputOutputManager = inputOutputManager;
-        this.texturedObject = texturedObject;
     }
 
     public InputOutputManager getInputOutputManager() {

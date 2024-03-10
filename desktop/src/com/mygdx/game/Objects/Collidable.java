@@ -1,6 +1,6 @@
-package com.mygdx.game.game_engine;
+package com.mygdx.game.Objects;
 
-import com.mygdx.game.game_layer.ControlledEntity;
+import com.mygdx.game_engine.Interface.ControlledEntity;
 
 public class Collidable implements ControlledEntity {
     // Collidable class implementation here
