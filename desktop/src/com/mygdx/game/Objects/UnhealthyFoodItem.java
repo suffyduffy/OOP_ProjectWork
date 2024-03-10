@@ -17,4 +17,9 @@ public class UnhealthyFoodItem extends Entities {
     public float getScaleFactor() {
         return scaleFactor;
     }
+
+    @Override
+    protected float getScaleFactorForType() {
+        return scaleFactor; // Use the scaleFactor specific to this entity
+    }
 }
