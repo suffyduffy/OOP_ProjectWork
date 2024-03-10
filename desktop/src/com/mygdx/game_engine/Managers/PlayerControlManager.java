@@ -1,6 +1,6 @@
 package com.mygdx.game_engine.Managers;
 
-import com.mygdx.game.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.TexturedObject;
 
 public class PlayerControlManager {
     private InputOutputManager inputOutputManager;

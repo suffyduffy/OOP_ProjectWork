@@ -4,12 +4,13 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Objects.Entities;
-import com.mygdx.game.Objects.HealthyFoodItem;
-import com.mygdx.game.Objects.TexturedObject;
-import com.mygdx.game.Objects.UnhealthyFoodItem;
-import com.mygdx.game.Scenes.MenuScene;
-import com.mygdx.game.Scenes.Scene;
+import com.mygdx.game_layer.Objects.Entities;
+import com.mygdx.game_layer.Objects.HealthyFoodItem;
+import com.mygdx.game_layer.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.UnhealthyFoodItem;
+import com.mygdx.game_layer.Scenes.MenuScene;
+import com.mygdx.game_layer.Scenes.Scene;
+import com.mygdx.game_layer.Scenes.GameScene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,24 +42,10 @@ public class GameManager extends Game {
         sceneManager = new SceneManager();
 
         // Initialize the start scene and add it to the scene manager
-        MenuScene menuScene = new MenuScene(entityManager);
+        MenuScene menuScene = new MenuScene(entityManager, sceneManager);
         sceneManager.addScene(menuScene);
         sceneManager.setCurrentScene(menuScene);
 
-        // Load and play music
-        music = Gdx.audio.newMusic(Gdx.files.internal("Music/Hey Kids Remake.WAV"));
-        music.setLooping(true);
-        music.play();
-
-        // Set up input processor to listen for touch input
-//        Gdx.input.setInputProcessor(new InputAdapter() {
-//            @Override
-//            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-//                // Switch to the GrassScene on any touch/click release
-//                sceneManager.setCurrentScene(new GrassScene(entityManager));
-//                return true;
-//            }
-//        });
 
         // Prepare all entities
         prepareEntities();

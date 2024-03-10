@@ -1,6 +1,6 @@
 package com.mygdx.game_engine.Managers;
 
-import com.mygdx.game.Objects.Entities;
+import com.mygdx.game_layer.Objects.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
