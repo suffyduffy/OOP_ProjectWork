@@ -1,11 +1,11 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game_layer.Objects;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.TexturedObject;
 
 public abstract class Entities {
     private List<TexturedObject> texturedObjects;

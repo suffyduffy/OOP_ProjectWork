@@ -1,6 +1,7 @@
 package com.mygdx.game_engine.Managers;
 
-import com.mygdx.game.Scenes.Scene;
+import com.mygdx.game_layer.Scenes.GameScene;
+import com.mygdx.game_layer.Scenes.Scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,14 @@ public class SceneManager {
 
     public SceneManager() {
         scenes = new ArrayList<>();
+    }
+    // In SceneManager.java
+    public void setCurrentScene(Scene scene) {
+        if (scene != null) {
+            currentScene = scene;
+        } else {
+            System.out.println("SceneManager: Attempted to set current scene to null.");
+        }
     }
 
     // Method to add scene to SceneManager
@@ -26,7 +35,7 @@ public class SceneManager {
     }
 
     // Method to set the current scene
-    public void setCurrentScene(Scene scene) {
+    public void setCurrentScene(GameScene scene) {
         if (scene != null) {
             currentScene = scene;
         } else {

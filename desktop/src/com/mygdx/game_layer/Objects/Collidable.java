@@ -1,4 +1,4 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game_layer.Objects;
 
 import com.mygdx.game_engine.Interface.ControlledEntity;
 

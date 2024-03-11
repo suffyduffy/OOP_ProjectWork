@@ -1,7 +1,8 @@
-package com.mygdx.game.Scenes;
+package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,12 +18,15 @@ public class MenuScene extends Scene {
     private AssetManager assetManager;
     private SceneManager sceneManager;
 
-    public MenuScene(EntityManager entityManager) {
+    public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/mainMenu.jpg", entityManager);
         stage = new Stage();
-        sceneManager = new SceneManager();
+        this.sceneManager = sceneManager;
+        //sceneManager = new SceneManager();
         Gdx.input.setInputProcessor(stage); // Set the stage as the input processor
-
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
+        music.setLooping(true);
+        music.play();
         // Load skin
         skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
@@ -38,8 +42,9 @@ public class MenuScene extends Scene {
                 // Handle button 1 click event
                 Gdx.app.log("Start Game", "Clicked");
                 if (sceneManager != null) {
-                    // Replace "GrassScene" with the name of the scene class you want to switch to
-                    sceneManager.setCurrentScene(new GameScene(entityManager));
+                    GameScene gameScene = new GameScene(entityManager);
+                    sceneManager.setCurrentScene(gameScene);
+                    music.dispose();
                 }
             }
         });
@@ -86,6 +91,7 @@ public class MenuScene extends Scene {
         super.dispose(); // Dispose of the background texture
         stage.dispose();
         skin.dispose();
+
     }
 
     // Add other methods specific to the start scene if necessary

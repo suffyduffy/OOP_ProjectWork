@@ -1,13 +1,13 @@
-package com.mygdx.game.Scenes;
+package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game_engine.Managers.EntityManager;
-import com.mygdx.game.Objects.Entities;
-import com.mygdx.game.Objects.HealthyFoodItem;
-import com.mygdx.game.Objects.TexturedObject;
-import com.mygdx.game.Objects.UnhealthyFoodItem;
+import com.mygdx.game_layer.Objects.Entities;
+import com.mygdx.game_layer.Objects.HealthyFoodItem;
+import com.mygdx.game_layer.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.UnhealthyFoodItem;
 
 import java.util.List;
 

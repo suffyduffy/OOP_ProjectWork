@@ -1,6 +1,6 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game_layer.Objects;
 
-import com.mygdx.game.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.TexturedObject;
 
 public class UnhealthyFoodItem extends Entities {
     private float scaleFactor = 1.0f; // default scale is 1.0 (no scaling)

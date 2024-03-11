@@ -1,14 +1,20 @@
-package com.mygdx.game.Scenes;
+package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_engine.Managers.EntityManager;
+import com.mygdx.game_layer.Scenes.Scene;
 
 public class GameScene extends Scene {
 
     public GameScene(EntityManager entityManager) {
         super("Scenes/grassCute.jpg", entityManager);
-        Gdx.app.log("GrassScene", "Constructor called");
+        Gdx.app.log("GameScene", "Constructor called");
+        // Load and play music
+        Music music = Gdx.audio.newMusic(Gdx.files.internal("Music/Hey Kids Remake.WAV"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override

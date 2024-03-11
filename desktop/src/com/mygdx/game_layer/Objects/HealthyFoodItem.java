@@ -1,7 +1,6 @@
-package com.mygdx.game.Objects;
+package com.mygdx.game_layer.Objects;
 
-import com.mygdx.game.Objects.TexturedObject;
-
+import com.mygdx.game_layer.Objects.TexturedObject;
 public class HealthyFoodItem extends Entities {
     private float scaleFactor = 1.0f;
     public HealthyFoodItem(String texturePath) {

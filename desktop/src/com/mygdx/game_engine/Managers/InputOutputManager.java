@@ -3,7 +3,7 @@ package com.mygdx.game_engine.Managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mygdx.game.Objects.TexturedObject;
+import com.mygdx.game_layer.Objects.TexturedObject;
 
 public class InputOutputManager {
     private List<TexturedObject> texturedObjects;
