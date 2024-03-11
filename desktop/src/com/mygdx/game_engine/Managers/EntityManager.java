@@ -1,6 +1,7 @@
 package com.mygdx.game_engine.Managers;
 
-import com.mygdx.game.Objects.Entities;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game_layer.Objects.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,12 @@ public class EntityManager {
 
     public List<Entities> getEntitiesList() {
         return entitiesList; // This method was missing and needs to be added
+    }
+
+    public void renderEntitiesWithScaling(SpriteBatch batch) {
+        for (Entities entity : entitiesList) {
+            entity.render(batch); // Assuming each entity knows how to render itself with scaling
+        }
     }
 
     public void dispose() {

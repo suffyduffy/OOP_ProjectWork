@@ -57,6 +57,10 @@ public abstract class Entities {
         }
     }
 
+    // Define a render method that each subclass will need to implement
+    public abstract void render(SpriteBatch batch);
+
+
     // Abstract method to be implemented by each subclass
     protected abstract float getScaleFactorForType();
     public void dispose() {
