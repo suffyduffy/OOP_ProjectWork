@@ -110,18 +110,20 @@ public class GameManager extends Game {
         if (currentScene != null) {
             currentScene.render(batch);
 
-            // Draw player
-            Texture playerTexture = fitManTexture;
-            if (isSkinny) {
-                playerTexture = skinnyManTexture;
-            } else if (isFat) {
-                playerTexture = fatManTexture;
+            // Draw player only if in the game scene
+            if (currentScene instanceof GameScene) {
+                Texture playerTexture = fitManTexture;
+                if (isSkinny) {
+                    playerTexture = skinnyManTexture;
+                } else if (isFat) {
+                    playerTexture = fatManTexture;
+                }
+                batch.draw(playerTexture, playerPosition.x, playerPosition.y);
             }
-            batch.draw(playerTexture, playerPosition.x, playerPosition.y);
-
         }
         batch.end();
     }
+
 
     private void handlePlayerMovement(float deltaTime) {
         float playerSpeed = isSkinny ? 300f : (isFat ? 100f : 200f); // Adjust speed based on player state
