@@ -32,7 +32,7 @@ public class HealthyFoodItem extends Entities {
     }
 
     @Override
-    protected float getScaleFactorForType() {
+    public float getScaleFactorForType() {
         return scaleFactor; // Use the scaleFactor specific to this entity
     }
 }

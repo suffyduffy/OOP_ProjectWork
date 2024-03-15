@@ -16,8 +16,11 @@ import com.mygdx.game_layer.Scenes.Scene;
 import com.mygdx.game_layer.Scenes.GameScene;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameManager extends Game {
 
@@ -33,7 +36,6 @@ public class GameManager extends Game {
     private float timeSinceLastEntity = 0f;
     private float timeBetweenEntities = 2f; // 1 second between entities
     private int nextEntityIndex = 0;
-    private List<Entities> allEntities = new ArrayList<>();
 
     // Additional image at the bottom
     private Texture fitManTexture;
@@ -42,6 +44,10 @@ public class GameManager extends Game {
     private Vector2 playerPosition;
     private boolean isSkinny = false;
     private boolean isFat = false;
+    // Assume these are class-level variables
+    private float playerScaleX = 1.0f; // Default scale factor for width
+    private float playerScaleY = 1.0f; // Default scale factor for height
+
 
     @Override
     public void create() {
@@ -70,35 +76,6 @@ public class GameManager extends Game {
         aiControlManager.prepareEntities();
     }
 
-//    private void prepareEntities() {
-//        // Create and add all entities to the allEntities list with their respective scale factors
-//        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
-//        burger.setScaleFactor(0.25f);
-//        allEntities.add(burger);
-//
-//        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
-//        frenchFries.setScaleFactor(0.5f);
-//        allEntities.add(frenchFries);
-//
-//        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
-//        pizza.setScaleFactor(0.25f);
-//        allEntities.add(pizza);
-//
-//        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
-//        hotDog.setScaleFactor(0.5f);
-//        allEntities.add(hotDog);
-//
-//        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
-//        cookedChicken.setScaleFactor(0.25f);
-//        allEntities.add(cookedChicken);
-//
-//        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
-//        salad.setScaleFactor(0.5f);
-//        allEntities.add(salad);
-//
-//        // Add more entities as needed
-//    }
-
     @Override
     public void render() {
         super.render();
@@ -113,16 +90,32 @@ public class GameManager extends Game {
             // Draw player only if in the game scene
             if (currentScene instanceof GameScene) {
                 Texture playerTexture = fitManTexture;
+                float scaleX = 0.5f; // Default scale factor for width
+                float scaleY = 0.5f; // Default scale factor for height
+
                 if (isSkinny) {
                     playerTexture = skinnyManTexture;
+                    // Define scale factors for the skinny state, for example:
+                    scaleX = 0.5f;
+                    scaleY = 0.5f;
                 } else if (isFat) {
                     playerTexture = fatManTexture;
+                    // Define scale factors for the fat state, for example:
+                    scaleX = 0.5f;
+                    scaleY = 0.5f;
                 }
-                batch.draw(playerTexture, playerPosition.x, playerPosition.y);
+
+                // Apply scale factors when drawing the texture
+                batch.draw(playerTexture,
+                        playerPosition.x,
+                        playerPosition.y,
+                        playerTexture.getWidth() * scaleX,
+                        playerTexture.getHeight() * scaleY);
             }
         }
         batch.end();
     }
+
 
 
     private void handlePlayerMovement(float deltaTime) {
@@ -139,7 +132,7 @@ public class GameManager extends Game {
             float playerWidth = getPlayerWidth();
             playerPosition.x += playerSpeed * deltaTime;
             // Ensure player does not go beyond right screen border
-            playerPosition.x = Math.min(Gdx.graphics.getWidth() - playerWidth, playerPosition.x);
+            playerPosition.x = Math.min(700, playerPosition.x);
         }
     }
 
@@ -156,6 +149,19 @@ public class GameManager extends Game {
     private void update(float deltaTime) {
         Scene currentScene = sceneManager.getCurrentScene();
 
+        // Update the scale factors based on the player's state
+        if (isSkinny) {
+            playerScaleX = 0.5f;
+            playerScaleY = 0.5f;
+        } else if (isFat) {
+            playerScaleX = 0.6f; // Assuming you want the fat state to be slightly larger
+            playerScaleY = 0.6f;
+        } else {
+            // Reset to default scale if neither skinny nor fat
+            playerScaleX = 0.5f;
+            playerScaleY = 0.5f;
+        }
+
         // Check if the current scene is not StartScene before adding entities
         if (!(currentScene instanceof MenuScene)) {
             timeSinceLastEntity += deltaTime;
@@ -170,25 +176,20 @@ public class GameManager extends Game {
 
         handlePlayerMovement(deltaTime);
 
-        // Update positions of food items
-        for (Entities entity : entityManager.getEntitiesList()) {
+        Iterator<Entities> iterator = entityManager.getEntitiesList().iterator();
+        while (iterator.hasNext()) {
+            Entities entity = iterator.next();
             for (TexturedObject texturedObject : entity.getTexturedObjects()) {
-                if (texturedObject.getPosition().y >= Gdx.graphics.getHeight()) {
-                    Random random = new Random();
-                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
-                    texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
-                }
-
                 // Make the food fall down by decreasing the y position
                 texturedObject.getPosition().y -= 60 * deltaTime;
 
-                // Reset the position to the top once it reaches the bottom
-                if (texturedObject.getPosition().y < 0) {
-                    texturedObject.getPosition().y = Gdx.graphics.getHeight();
-                }
+                // Define scale factors for the food entities, these should be the same values used when drawing them
+                float foodScaleX = entity.getScaleFactorForType(); // Assume getScaleFactor() returns the scale for this food entity
+                float foodScaleY = entity.getScaleFactorForType(); // Assuming uniform scaling for simplicity
 
-                // Check for collision with player
-                if (checkCollision(texturedObject)) {
+
+                // Check if food item is colliding with the player
+                if (checkCollision(texturedObject, foodScaleX, foodScaleY)) {
                     if (entity instanceof HealthyFoodItem) {
                         isSkinny = true;
                         isFat = false;
@@ -196,31 +197,44 @@ public class GameManager extends Game {
                         isSkinny = false;
                         isFat = true;
                     }
-                    entityManager.removeEntity(entity);
+                    // Instead of removing, reposition the entity to the top
+                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
+                    texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
+                }
+
+                // Reset the position to the top once it reaches the bottom
+                if (texturedObject.getPosition().y < 0) {
+                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
+                    texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
                 }
             }
         }
     }
 
-    private boolean checkCollision(TexturedObject foodItem) {
-        float playerWidth = getPlayerWidth();
-        float playerHeight = fitManTexture.getHeight(); // Assume all player textures have the same height
+    private boolean checkCollision(TexturedObject foodItem, float foodScaleX, float foodScaleY) {
+        // Get the scaled dimensions of the player
+        float playerWidth = getPlayerWidth() * playerScaleX; // playerScaleX is the scale factor for the player's width
+        float playerHeight = fitManTexture.getHeight() * playerScaleY; // playerScaleY is the scale factor for the player's height
 
-        // Calculate player bounding box
+        // Calculate player bounding box based on scaled dimensions
         float playerLeft = playerPosition.x;
         float playerRight = playerPosition.x + playerWidth;
         float playerTop = playerPosition.y + playerHeight;
         float playerBottom = playerPosition.y;
 
-        // Calculate food item bounding box
+        // Get the scaled dimensions of the food item
+        float foodWidth = foodItem.getTexture().getWidth() * foodScaleX; // foodScaleX is the scale factor for the food's width
+        float foodHeight = foodItem.getTexture().getHeight() * foodScaleY; // foodScaleY is the scale factor for the food's height
+
+        // Calculate food item bounding box based on scaled dimensions
         float foodLeft = foodItem.getPosition().x;
-        float foodRight = foodItem.getPosition().x + foodItem.getTexture().getWidth();
-        float foodTop = foodItem.getPosition().y + foodItem.getTexture().getHeight();
+        float foodRight = foodItem.getPosition().x + foodWidth;
+        float foodTop = foodItem.getPosition().y + foodHeight;
         float foodBottom = foodItem.getPosition().y;
 
         // Check for collision
         return playerRight >= foodLeft && playerLeft <= foodRight &&
-                playerBottom <= foodTop && playerTop >= foodBottom;
+                playerTop >= foodBottom && playerBottom <= foodTop;
     }
 
     @Override

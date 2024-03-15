@@ -62,7 +62,7 @@ public abstract class Entities {
 
 
     // Abstract method to be implemented by each subclass
-    protected abstract float getScaleFactorForType();
+    public abstract float getScaleFactorForType();
     public void dispose() {
         for (TexturedObject texturedObject : texturedObjects) {
             texturedObject.dispose();
