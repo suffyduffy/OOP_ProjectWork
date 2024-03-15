@@ -22,7 +22,7 @@ public class AIControlManager implements ControlledEntity {
         aiControlledEntities.add(burger);
 
         UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
-        frenchFries.setScaleFactor(0.5f);
+        frenchFries.setScaleFactor(0.25f);
         aiControlledEntities.add(frenchFries);
 
         UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
@@ -30,15 +30,15 @@ public class AIControlManager implements ControlledEntity {
         aiControlledEntities.add(pizza);
 
         UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
-        hotDog.setScaleFactor(0.5f);
+        hotDog.setScaleFactor(0.25f);
         aiControlledEntities.add(hotDog);
 
         HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
-        cookedChicken.setScaleFactor(0.25f);
+        cookedChicken.setScaleFactor(0.125f);
         aiControlledEntities.add(cookedChicken);
 
         HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
-        salad.setScaleFactor(0.5f);
+        salad.setScaleFactor(0.25f);
         aiControlledEntities.add(salad);
 
         // Add more entities as needed
