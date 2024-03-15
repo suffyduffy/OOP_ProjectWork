@@ -5,15 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game_layer.Objects.Entities;
-import com.mygdx.game_layer.Objects.HealthyFoodItem;
-import com.mygdx.game_layer.Objects.TexturedObject;
-import com.mygdx.game_layer.Objects.UnhealthyFoodItem;
+import com.mygdx.game_layer.Objects.*;
 import com.mygdx.game_layer.Scenes.MenuScene;
 import com.mygdx.game_layer.Scenes.Scene;
 import com.mygdx.game_layer.Scenes.GameScene;
+import com.badlogic.gdx.graphics.Color;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,11 +31,8 @@ public class GameManager extends Game {
     private InputOutputManager inputOutputManager;
     private SpriteBatch batch;
     private Music music;
+    private Timer gameTimer; // New timer field
 
-    // Timing and entities appearance control
-    private float timeSinceLastEntity = 0f;
-    private float timeBetweenEntities = 2f; // 1 second between entities
-    private int nextEntityIndex = 0;
 
     // Additional image at the bottom
     private Texture fitManTexture;
@@ -47,6 +44,7 @@ public class GameManager extends Game {
     // Assume these are class-level variables
     private float playerScaleX = 1.0f; // Default scale factor for width
     private float playerScaleY = 1.0f; // Default scale factor for height
+    private BitmapFont font; // Font for text rendering
 
 
     @Override
@@ -71,6 +69,13 @@ public class GameManager extends Game {
                 (Gdx.graphics.getWidth() - fitManTexture.getWidth()) / 2,
                 0
         );
+
+        // Initialize the timer with 10 seconds
+        gameTimer = new Timer(10); // Adjust the initial time as needed
+
+        // Initialize font
+        font = new BitmapFont();
+        font.setColor(Color.BLACK);
 
         // Prepare all entities
         aiControlManager.prepareEntities();
@@ -103,6 +108,15 @@ public class GameManager extends Game {
                     // Define scale factors for the fat state, for example:
                     scaleX = 0.5f;
                     scaleY = 0.5f;
+                }
+
+                // Render the timer at the top right corner
+                font.draw(batch, "Time: " + (int) gameTimer.getTimeRemaining(), Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 20);
+
+                // Check if time is up
+                if (gameTimer.getTimeRemaining() <= 0) {
+                    // Render "You Lose" text
+                    font.draw(batch, "You Lose", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
                 }
 
                 // Apply scale factors when drawing the texture
@@ -164,13 +178,13 @@ public class GameManager extends Game {
 
         // Check if the current scene is not StartScene before adding entities
         if (!(currentScene instanceof MenuScene)) {
-            timeSinceLastEntity += deltaTime;
+            aiControlManager.timeSinceLastEntity += deltaTime;
 
             // Check if it's time to add the next entity
-            if (timeSinceLastEntity >= timeBetweenEntities && nextEntityIndex < aiControlManager.aiControlledEntities.size()) {
-                Entities entity = aiControlManager.aiControlledEntities.get(nextEntityIndex++);
+            if (aiControlManager.timeSinceLastEntity >= aiControlManager.timeBetweenEntities && aiControlManager.nextEntityIndex < aiControlManager.aiControlledEntities.size()) {
+                Entities entity = aiControlManager.aiControlledEntities.get(aiControlManager.nextEntityIndex++);
                 entityManager.addEntity(entity);
-                timeSinceLastEntity = 0f;
+                aiControlManager.timeSinceLastEntity = 0f;
             }
         }
 
@@ -207,9 +221,34 @@ public class GameManager extends Game {
                     float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
                     texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
                 }
+                // Check if the current scene is not StartScene before adding entities
+                if (!(currentScene instanceof MenuScene)) {
+                    // Start the timer when the game starts
+                    gameTimer.start();
+
+                    // Other update code...
+                }
+
+                // Update the timer
+                gameTimer.update(deltaTime);
+
+                // Check if it's time to stop the game
+                if (gameTimer.getTimeRemaining() <= 0) {
+                    // Stop the game
+                    stopGame();
+                    return; // Exit update loop early
+                }
+
             }
         }
     }
+    private void stopGame() {
+        // Stop the timer
+        gameTimer.stop();
+
+        // Other stop game actions...
+    }
+
 
     private boolean checkCollision(TexturedObject foodItem, float foodScaleX, float foodScaleY) {
         // Get the scaled dimensions of the player
