@@ -67,37 +67,37 @@ public class GameManager extends Game {
         );
 
         // Prepare all entities
-        prepareEntities();
+        aiControlManager.prepareEntities();
     }
 
-    private void prepareEntities() {
-        // Create and add all entities to the allEntities list with their respective scale factors
-        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
-        burger.setScaleFactor(0.25f);
-        allEntities.add(burger);
-
-        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
-        frenchFries.setScaleFactor(0.5f);
-        allEntities.add(frenchFries);
-
-        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
-        pizza.setScaleFactor(0.25f);
-        allEntities.add(pizza);
-
-        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
-        hotDog.setScaleFactor(0.5f);
-        allEntities.add(hotDog);
-
-        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
-        cookedChicken.setScaleFactor(0.25f);
-        allEntities.add(cookedChicken);
-
-        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
-        salad.setScaleFactor(0.5f);
-        allEntities.add(salad);
-
-        // Add more entities as needed
-    }
+//    private void prepareEntities() {
+//        // Create and add all entities to the allEntities list with their respective scale factors
+//        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
+//        burger.setScaleFactor(0.25f);
+//        allEntities.add(burger);
+//
+//        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
+//        frenchFries.setScaleFactor(0.5f);
+//        allEntities.add(frenchFries);
+//
+//        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
+//        pizza.setScaleFactor(0.25f);
+//        allEntities.add(pizza);
+//
+//        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
+//        hotDog.setScaleFactor(0.5f);
+//        allEntities.add(hotDog);
+//
+//        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
+//        cookedChicken.setScaleFactor(0.25f);
+//        allEntities.add(cookedChicken);
+//
+//        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
+//        salad.setScaleFactor(0.5f);
+//        allEntities.add(salad);
+//
+//        // Add more entities as needed
+//    }
 
     @Override
     public void render() {
@@ -161,8 +161,8 @@ public class GameManager extends Game {
             timeSinceLastEntity += deltaTime;
 
             // Check if it's time to add the next entity
-            if (timeSinceLastEntity >= timeBetweenEntities && nextEntityIndex < allEntities.size()) {
-                Entities entity = allEntities.get(nextEntityIndex++);
+            if (timeSinceLastEntity >= timeBetweenEntities && nextEntityIndex < aiControlManager.aiControlledEntities.size()) {
+                Entities entity = aiControlManager.aiControlledEntities.get(nextEntityIndex++);
                 entityManager.addEntity(entity);
                 timeSinceLastEntity = 0f;
             }
