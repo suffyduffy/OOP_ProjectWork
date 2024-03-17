@@ -137,10 +137,6 @@ public class EntityManager {
         return cookedchickenTexture;
     }
 
-    public void setFruitTexture(Texture fruitTexture) {
-        this.fruitTexture = fruitTexture;
-    }
-
     public void renderEntitiesWithScaling(SpriteBatch batch) {
         for (Entities entity : entitiesList) {
             entity.render(batch); // Assuming each entity knows how to render itself with scaling
@@ -155,6 +151,7 @@ public class EntityManager {
         fitManTexture.dispose();
         skinnyManTexture.dispose();
         fatManTexture.dispose();
+        burgerTexture.dispose();
     }
 
     float getPlayerWidth(GameManager gameManager) {
