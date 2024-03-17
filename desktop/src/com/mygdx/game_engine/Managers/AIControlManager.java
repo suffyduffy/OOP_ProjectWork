@@ -16,7 +16,6 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class AIControlManager {
     // Implement ControlledEntity methods here
-    public List<Entities> aiControlledEntities = new ArrayList<>();
     public float timeSinceLastEntity = 0f;
     public float timeBetweenEntities = 2f;
     public int nextEntityIndex = 0;
@@ -29,47 +28,29 @@ public class AIControlManager {
     }
 
 
-    public void prepareEntities() {
-        // Create and add all entities to the allEntities list with their respective scale factors
-        UnhealthyFoodItem burger = new UnhealthyFoodItem("Food/Burger.png");
-        burger.setScaleFactor(0.25f);
-        aiControlledEntities.add(burger);
-
-        UnhealthyFoodItem frenchFries = new UnhealthyFoodItem("Food/FrenchFries.png");
-        frenchFries.setScaleFactor(0.25f);
-        aiControlledEntities.add(frenchFries);
-
-        UnhealthyFoodItem pizza = new UnhealthyFoodItem("Food/Pizza.png");
-        pizza.setScaleFactor(0.25f);
-        aiControlledEntities.add(pizza);
-
-        UnhealthyFoodItem hotDog = new UnhealthyFoodItem("Food/Hotdog.png");
-        hotDog.setScaleFactor(0.25f);
-        aiControlledEntities.add(hotDog);
-
-        HealthyFoodItem cookedChicken = new HealthyFoodItem("Food/CookedChicken.png");
-        cookedChicken.setScaleFactor(0.125f);
-        aiControlledEntities.add(cookedChicken);
-
-        HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
-        salad.setScaleFactor(0.25f);
-        aiControlledEntities.add(salad);
-
-        HealthyFoodItem fruit = new HealthyFoodItem("Fruit.png");
-        fruit.setScaleFactor(0.125f);
-        aiControlledEntities.add(fruit);
-
-        // Add more entities as needed
-    }
 
     public void updateEntityManagement(float deltaTime) {
         timeSinceLastEntity += deltaTime;
 
-        if (timeSinceLastEntity >= timeBetweenEntities && nextEntityIndex < aiControlledEntities.size()) {
-            Entities entity = aiControlledEntities.get(nextEntityIndex++);
-            // Note: EntityManager should be accessible here, possibly passed in constructor or through a setter
-            entityManager.addEntity(entity);
-            timeSinceLastEntity = 0f;
+
+        // Check if enough time has passed to activate the next entity
+        if (timeSinceLastEntity >= timeBetweenEntities) {
+            if (nextEntityIndex < entityManager.getInactiveEntitiesList().size()) {
+                Entities entityToSpawn = entityManager.getInactiveEntitiesList().get(nextEntityIndex);
+
+                // Activate the entity, which should also remove it from the inactive list
+                entityManager.activateEntity(entityToSpawn);
+
+                // Increment the index to point to the next entity in the list
+                nextEntityIndex++;
+
+                // Reset the timer after an entity is activated to ensure one activation per interval
+                timeSinceLastEntity = 0f;
+            } else {
+                // If there are no more entities to activate, reset the index to loop back
+                // if looping is desired behavior, or handle the end of activation as needed
+                nextEntityIndex = 0; // or handle the end of the list appropriately
+            }
         }
     }
 

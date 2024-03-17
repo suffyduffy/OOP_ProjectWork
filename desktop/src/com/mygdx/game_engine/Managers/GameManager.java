@@ -30,6 +30,7 @@ public class GameManager extends Game {
     Texture fitManTexture;
     Texture skinnyManTexture;
     Texture fatManTexture;
+
     Vector2 playerPosition;
     boolean isSkinny = false;
     boolean isFat = false;
@@ -60,6 +61,9 @@ public class GameManager extends Game {
                 0
         );
 
+        entityManager.initializeFoodItems(); // This line initializes the food items
+
+
         // Initialize the timer with 10 seconds
         gameTimer = new Timer(100); // Adjust the initial time as needed
 
@@ -68,7 +72,7 @@ public class GameManager extends Game {
         font.setColor(Color.BLACK);
 
         // Prepare all entities
-        aiControlManager.prepareEntities();
+//        aiControlManager.prepareEntities();
     }
 
     @Override

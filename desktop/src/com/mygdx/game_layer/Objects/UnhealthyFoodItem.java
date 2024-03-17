@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_layer.Objects.TexturedObject;
 
 public class UnhealthyFoodItem extends Entities {
-    private float scaleFactor = 1.0f; // default scale is 1.0 (no scaling)
+    private float scaleFactor; // default scale is 1.0 (no scaling)
 
-    public UnhealthyFoodItem(String texturePath) {
+    public UnhealthyFoodItem(String texturePath, float scaleFactor) {
         super();
         addTexturedObject(new TexturedObject(texturePath));
+        setScaleFactor(scaleFactor); // Set the scale factor for the food item
     }
 
     @Override
