@@ -1,13 +1,17 @@
 package com.mygdx.game_layer.Objects;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_layer.Objects.TexturedObject;
 public class HealthyFoodItem extends Entities {
+    private Texture texture; // Texture for this food item
+
     private float scaleFactor;
     public HealthyFoodItem(String texturePath, float scaleFactor) {
         super();
         addTexturedObject(new TexturedObject(texturePath));
         setScaleFactor(scaleFactor); // Set the scale factor for the food item
+        this.texture = new Texture(texturePath); // Initialize your texture
 
     }
 
@@ -36,6 +40,13 @@ public class HealthyFoodItem extends Entities {
     @Override
     public float getScaleFactorForType() {
         return scaleFactor; // Use the scaleFactor specific to this entity
+    }
+    @Override
+    public void dispose() {
+        if (texture != null) {
+            texture.dispose(); // Dispose of the texture
+            texture = null; // Clear the reference to allow garbage collection
+        }
     }
 }
 

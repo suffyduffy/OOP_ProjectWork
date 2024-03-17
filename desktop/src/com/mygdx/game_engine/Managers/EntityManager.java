@@ -154,7 +154,6 @@ public class EntityManager {
         fitManTexture.dispose();
         skinnyManTexture.dispose();
         fatManTexture.dispose();
-        burgerTexture.dispose();
     }
 
     float getPlayerWidth(GameManager gameManager) {
