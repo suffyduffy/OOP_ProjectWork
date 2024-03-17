@@ -85,8 +85,8 @@ public class GameManager extends Game {
             // Draw player only if in the game scene
             if (currentScene instanceof GameScene) {
                 Texture playerTexture = fitManTexture;
-                float scaleX = 0.5f; // Default scale factor for width
-                float scaleY = 0.5f; // Default scale factor for height
+                float scaleX = 0.55f; // Default scale factor for width
+                float scaleY = 0.55f; // Default scale factor for height
 
                 if (isSkinny) {
                     playerTexture = skinnyManTexture;
@@ -96,8 +96,8 @@ public class GameManager extends Game {
                 } else if (isFat) {
                     playerTexture = fatManTexture;
                     // Define scale factors for the fat state, for example:
-                    scaleX = 0.5f;
-                    scaleY = 0.5f;
+                    scaleX = 0.6f;
+                    scaleY = 0.6f;
                 }
 
                 // Render the timer at the top right corner
@@ -132,8 +132,8 @@ public class GameManager extends Game {
             playerScaleY = 0.6f;
         } else {
             // Reset to default scale if neither skinny nor fat
-            playerScaleX = 0.5f;
-            playerScaleY = 0.5f;
+            playerScaleX = 0.55f;
+            playerScaleY = 0.55f;
         }
 
         // Check if the current scene is not StartScene before adding entities

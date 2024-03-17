@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
-public class AIControlManager implements ControlledEntity {
+public class AIControlManager {
     // Implement ControlledEntity methods here
     public List<Entities> aiControlledEntities = new ArrayList<>();
     public float timeSinceLastEntity = 0f;
@@ -54,6 +54,10 @@ public class AIControlManager implements ControlledEntity {
         HealthyFoodItem salad = new HealthyFoodItem("Food/Salad.png");
         salad.setScaleFactor(0.25f);
         aiControlledEntities.add(salad);
+
+        HealthyFoodItem fruit = new HealthyFoodItem("Fruit.png");
+        fruit.setScaleFactor(0.125f);
+        aiControlledEntities.add(fruit);
 
         // Add more entities as needed
     }
