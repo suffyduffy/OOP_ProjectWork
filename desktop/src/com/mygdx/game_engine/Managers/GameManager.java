@@ -52,8 +52,8 @@ public class GameManager extends Game {
         batch = new SpriteBatch();
         inputOutputManager = new InputOutputManager();
         playerControlManager = new PlayerControlManager(inputOutputManager);
-        aiControlManager = new AIControlManager();
         entityManager = new EntityManager();
+        aiControlManager = new AIControlManager(entityManager);
         sceneManager = new SceneManager();
 
         // Initialize the start scene and add it to the scene manager
@@ -71,7 +71,7 @@ public class GameManager extends Game {
         );
 
         // Initialize the timer with 10 seconds
-        gameTimer = new Timer(10); // Adjust the initial time as needed
+        gameTimer = new Timer(100); // Adjust the initial time as needed
 
         // Initialize font
         font = new BitmapFont();
@@ -163,6 +163,10 @@ public class GameManager extends Game {
     private void update(float deltaTime) {
         Scene currentScene = sceneManager.getCurrentScene();
 
+//        System.out.println("DeltaTime: " + deltaTime); // Check that deltaTime is correct
+//        System.out.println("Timer Running: " + gameTimer.isRunning()); // Check if the timer thinks it's running
+//        System.out.println("Time Remaining: " + gameTimer.getTimeRemaining()); // Check the time remaining is decreasing
+
         // Update the scale factors based on the player's state
         if (isSkinny) {
             playerScaleX = 0.5f;
@@ -178,31 +182,34 @@ public class GameManager extends Game {
 
         // Check if the current scene is not StartScene before adding entities
         if (!(currentScene instanceof MenuScene)) {
-            aiControlManager.timeSinceLastEntity += deltaTime;
+            aiControlManager.updateEntityManagement(deltaTime);
+            aiControlManager.updateEntities(deltaTime, playerPosition, playerScaleX, playerScaleY);
 
-            // Check if it's time to add the next entity
-            if (aiControlManager.timeSinceLastEntity >= aiControlManager.timeBetweenEntities && aiControlManager.nextEntityIndex < aiControlManager.aiControlledEntities.size()) {
-                Entities entity = aiControlManager.aiControlledEntities.get(aiControlManager.nextEntityIndex++);
-                entityManager.addEntity(entity);
-                aiControlManager.timeSinceLastEntity = 0f;
-            }
         }
 
         handlePlayerMovement(deltaTime);
 
-        Iterator<Entities> iterator = entityManager.getEntitiesList().iterator();
-        while (iterator.hasNext()) {
-            Entities entity = iterator.next();
+        // Player collision logic and other player-specific updates
+        checkCollisionsAndHandlePlayerState();
+
+        // When the game scene starts, start the timer once
+        if (currentScene instanceof GameScene && !gameTimer.isRunning()) {
+            gameTimer.start();
+        }
+
+        // Timer logic remains here...
+        gameTimer.update(deltaTime);
+        if (gameTimer.getTimeRemaining() <= 0) {
+            stopGame();
+        }
+    }
+    // Method to check collisions and handle player state
+    private void checkCollisionsAndHandlePlayerState() {
+        for (Entities entity : entityManager.getEntitiesList()) {
             for (TexturedObject texturedObject : entity.getTexturedObjects()) {
-                // Make the food fall down by decreasing the y position
-                texturedObject.getPosition().y -= 60 * deltaTime;
+                float foodScaleX = entity.getScaleFactorForType();
+                float foodScaleY = entity.getScaleFactorForType();
 
-                // Define scale factors for the food entities, these should be the same values used when drawing them
-                float foodScaleX = entity.getScaleFactorForType(); // Assume getScaleFactor() returns the scale for this food entity
-                float foodScaleY = entity.getScaleFactorForType(); // Assuming uniform scaling for simplicity
-
-
-                // Check if food item is colliding with the player
                 if (checkCollision(texturedObject, foodScaleX, foodScaleY)) {
                     if (entity instanceof HealthyFoodItem) {
                         isSkinny = true;
@@ -211,34 +218,10 @@ public class GameManager extends Game {
                         isSkinny = false;
                         isFat = true;
                     }
-                    // Instead of removing, reposition the entity to the top
+                    // Reposition the entity to the top
                     float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
                     texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
                 }
-
-                // Reset the position to the top once it reaches the bottom
-                if (texturedObject.getPosition().y < 0) {
-                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
-                    texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
-                }
-                // Check if the current scene is not StartScene before adding entities
-                if (!(currentScene instanceof MenuScene)) {
-                    // Start the timer when the game starts
-                    gameTimer.start();
-
-                    // Other update code...
-                }
-
-                // Update the timer
-                gameTimer.update(deltaTime);
-
-                // Check if it's time to stop the game
-                if (gameTimer.getTimeRemaining() <= 0) {
-                    // Stop the game
-                    stopGame();
-                    return; // Exit update loop early
-                }
-
             }
         }
     }
