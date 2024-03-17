@@ -2,7 +2,6 @@ package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,37 +14,28 @@ import com.mygdx.game_layer.Scenes.GameScene;
 import com.badlogic.gdx.graphics.Color;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameManager extends Game {
 
     private PlayerControlManager playerControlManager;
     private AIControlManager aiControlManager;
-    private EntityManager entityManager;
+    EntityManager entityManager;
     private SceneManager sceneManager;
     private InputOutputManager inputOutputManager;
     private SpriteBatch batch;
     private Music music;
     private Timer gameTimer; // New timer field
 
-
-    // Additional image at the bottom
-    private Texture fitManTexture;
-    private Texture skinnyManTexture;
-    private Texture fatManTexture;
-    private Vector2 playerPosition;
-    private boolean isSkinny = false;
-    private boolean isFat = false;
-    // Assume these are class-level variables
-    private float playerScaleX = 1.0f; // Default scale factor for width
-    private float playerScaleY = 1.0f; // Default scale factor for height
+    Texture fitManTexture;
+    Texture skinnyManTexture;
+    Texture fatManTexture;
+    Vector2 playerPosition;
+    boolean isSkinny = false;
+    boolean isFat = false;
+    float playerScaleX = 1.0f; // Default scale factor for width
+    float playerScaleY = 1.0f; // Default scale factor for height
     private BitmapFont font; // Font for text rendering
-
 
     @Override
     public void create() {
@@ -61,10 +51,10 @@ public class GameManager extends Game {
         sceneManager.addScene(menuScene);
         sceneManager.setCurrentScene(menuScene);
 
-        // Load additional images
-        fitManTexture = new Texture("Sprites/fitman.png");
-        skinnyManTexture = new Texture("Sprites/skinnyman.png");
-        fatManTexture = new Texture("Sprites/fatman.png");
+        // Load additional images from EntityManager
+        fitManTexture = entityManager.getFitManTexture();
+        skinnyManTexture = entityManager.getSkinnyManTexture();
+        fatManTexture = entityManager.getFatManTexture();
         playerPosition = new Vector2(
                 (Gdx.graphics.getWidth() - fitManTexture.getWidth()) / 2,
                 0
@@ -130,42 +120,8 @@ public class GameManager extends Game {
         batch.end();
     }
 
-
-
-    private void handlePlayerMovement(float deltaTime) {
-        float playerSpeed = isSkinny ? 300f : (isFat ? 100f : 200f); // Adjust speed based on player state
-
-        // Move player left
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            playerPosition.x -= playerSpeed * deltaTime;
-            // Ensure player does not go beyond left screen border
-            playerPosition.x = Math.max(0, playerPosition.x);
-        }
-        // Move player right
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            float playerWidth = getPlayerWidth();
-            playerPosition.x += playerSpeed * deltaTime;
-            // Ensure player does not go beyond right screen border
-            playerPosition.x = Math.min(700, playerPosition.x);
-        }
-    }
-
-    private float getPlayerWidth() {
-        Texture playerTexture = fitManTexture;
-        if (isSkinny) {
-            playerTexture = skinnyManTexture;
-        } else if (isFat) {
-            playerTexture = fatManTexture;
-        }
-        return playerTexture.getWidth();
-    }
-
     private void update(float deltaTime) {
         Scene currentScene = sceneManager.getCurrentScene();
-
-//        System.out.println("DeltaTime: " + deltaTime); // Check that deltaTime is correct
-//        System.out.println("Timer Running: " + gameTimer.isRunning()); // Check if the timer thinks it's running
-//        System.out.println("Time Remaining: " + gameTimer.getTimeRemaining()); // Check the time remaining is decreasing
 
         // Update the scale factors based on the player's state
         if (isSkinny) {
@@ -184,13 +140,12 @@ public class GameManager extends Game {
         if (!(currentScene instanceof MenuScene)) {
             aiControlManager.updateEntityManagement(deltaTime);
             aiControlManager.updateEntities(deltaTime, playerPosition, playerScaleX, playerScaleY);
-
         }
 
-        handlePlayerMovement(deltaTime);
+        playerControlManager.handlePlayerMovement(deltaTime, this);
 
         // Player collision logic and other player-specific updates
-        checkCollisionsAndHandlePlayerState();
+        playerControlManager.checkCollisionsAndHandlePlayerState(entityManager, this);
 
         // When the game scene starts, start the timer once
         if (currentScene instanceof GameScene && !gameTimer.isRunning()) {
@@ -203,60 +158,11 @@ public class GameManager extends Game {
             stopGame();
         }
     }
-    // Method to check collisions and handle player state
-    private void checkCollisionsAndHandlePlayerState() {
-        for (Entities entity : entityManager.getEntitiesList()) {
-            for (TexturedObject texturedObject : entity.getTexturedObjects()) {
-                float foodScaleX = entity.getScaleFactorForType();
-                float foodScaleY = entity.getScaleFactorForType();
 
-                if (checkCollision(texturedObject, foodScaleX, foodScaleY)) {
-                    if (entity instanceof HealthyFoodItem) {
-                        isSkinny = true;
-                        isFat = false;
-                    } else if (entity instanceof UnhealthyFoodItem) {
-                        isSkinny = false;
-                        isFat = true;
-                    }
-                    // Reposition the entity to the top
-                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
-                    texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
-                }
-            }
-        }
-    }
     private void stopGame() {
         // Stop the timer
         gameTimer.stop();
-
         // Other stop game actions...
-    }
-
-
-    private boolean checkCollision(TexturedObject foodItem, float foodScaleX, float foodScaleY) {
-        // Get the scaled dimensions of the player
-        float playerWidth = getPlayerWidth() * playerScaleX; // playerScaleX is the scale factor for the player's width
-        float playerHeight = fitManTexture.getHeight() * playerScaleY; // playerScaleY is the scale factor for the player's height
-
-        // Calculate player bounding box based on scaled dimensions
-        float playerLeft = playerPosition.x;
-        float playerRight = playerPosition.x + playerWidth;
-        float playerTop = playerPosition.y + playerHeight;
-        float playerBottom = playerPosition.y;
-
-        // Get the scaled dimensions of the food item
-        float foodWidth = foodItem.getTexture().getWidth() * foodScaleX; // foodScaleX is the scale factor for the food's width
-        float foodHeight = foodItem.getTexture().getHeight() * foodScaleY; // foodScaleY is the scale factor for the food's height
-
-        // Calculate food item bounding box based on scaled dimensions
-        float foodLeft = foodItem.getPosition().x;
-        float foodRight = foodItem.getPosition().x + foodWidth;
-        float foodTop = foodItem.getPosition().y + foodHeight;
-        float foodBottom = foodItem.getPosition().y;
-
-        // Check for collision
-        return playerRight >= foodLeft && playerLeft <= foodRight &&
-                playerTop >= foodBottom && playerBottom <= foodTop;
     }
 
     @Override
@@ -273,13 +179,11 @@ public class GameManager extends Game {
         if (music != null) {
             music.dispose();
         }
-        // Dispose additional image textures
-        fitManTexture.dispose();
-        skinnyManTexture.dispose();
-        fatManTexture.dispose();
+        // No need to dispose textures here as they are managed by EntityManager
     }
 
     public SceneManager getSceneManager() {
         return sceneManager;
     }
+
 }
