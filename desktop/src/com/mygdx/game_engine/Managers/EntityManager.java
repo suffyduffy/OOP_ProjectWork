@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_layer.Objects.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EntityManager {
@@ -70,6 +71,8 @@ public class EntityManager {
         Gdx.app.log("EntityManager", "Added Fruit. Inactive list size: " + inactiveEntitiesList.size());
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Salad.png", 0.25f));
         Gdx.app.log("EntityManager", "Added Salad. Inactive list size: " + inactiveEntitiesList.size());
+
+        Collections.shuffle(inactiveEntitiesList);
 
     }
 
