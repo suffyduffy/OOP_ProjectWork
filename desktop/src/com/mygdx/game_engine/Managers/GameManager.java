@@ -63,7 +63,6 @@ public class GameManager extends Game {
 
         entityManager.initializeFoodItems(); // This line initializes the food items
 
-
         // Initialize the timer with 10 seconds
         gameTimer = new Timer(100); // Adjust the initial time as needed
 
@@ -71,8 +70,6 @@ public class GameManager extends Game {
         font = new BitmapFont();
         font.setColor(Color.BLACK);
 
-        // Prepare all entities
-//        aiControlManager.prepareEntities();
     }
 
     @Override

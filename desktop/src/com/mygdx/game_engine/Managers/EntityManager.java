@@ -39,39 +39,18 @@ public class EntityManager {
         fitManTexture = new Texture("Sprites/fitman.png");
         skinnyManTexture = new Texture("Sprites/skinnyman.png");
         fatManTexture = new Texture("Sprites/fatman.png");
-
-        // Load textures for the food items
-//        burgerTexture = new Texture("Food/Burger.png");
-//        cookedchickenTexture = new Texture("Food/CookedChicken.png");
-//        frenchfriesTexture = new Texture("Food/FrenchFries.png");
-//        fruitTexture = new Texture("Food/Fruit.png");
-//        hotdogTexture = new Texture("Food/Hotdog.png");
-//        pizzaTexture = new Texture("Food/Pizza.png");
-//        saladTexture = new Texture("Food/Salad.png");
     }
 
     public void initializeFoodItems() {
         // Instantiate and categorize food items
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Burger.png", 0.25f)); // Assuming constructor takes texture path and scale factor
-        Gdx.app.log("EntityManager", "Added Burger. Inactive list size: " + inactiveEntitiesList.size());
-
         // ... add other food items similarly
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/FrenchFries.png", 0.25f));
-        Gdx.app.log("EntityManager", "Added frenchfries. Inactive list size: " + inactiveEntitiesList.size());
-
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Hotdog.png", 0.25f));
-        Gdx.app.log("EntityManager", "Added hotdog. Inactive list size: " + inactiveEntitiesList.size());
-
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Pizza.png", 0.25f));
-        Gdx.app.log("EntityManager", "Added Pizza. Inactive list size: " + inactiveEntitiesList.size());
-
         inactiveEntitiesList.add(new HealthyFoodItem("Food/CookedChicken.png", 0.125f));
-        Gdx.app.log("EntityManager", "Added cookedChicken. Inactive list size: " + inactiveEntitiesList.size());
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Fruit.png", 0.125f));
-        Gdx.app.log("EntityManager", "Added Fruit. Inactive list size: " + inactiveEntitiesList.size());
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Salad.png", 0.25f));
-        Gdx.app.log("EntityManager", "Added Salad. Inactive list size: " + inactiveEntitiesList.size());
-
         Collections.shuffle(inactiveEntitiesList);
 
     }
@@ -83,11 +62,7 @@ public class EntityManager {
     public void activateEntity(Entities entity) {
         if (inactiveEntitiesList.remove(entity)) { // Remove the entity from the inactive list if present
             entitiesList.add(entity); // Add the entity to the active list
-            Gdx.app.log("EntityManager", "Activated entity. Inactive list size: " + inactiveEntitiesList.size());
-            Gdx.app.log("EntityManager", "Activated entity. Active list size: " + entitiesList.size());
-        } else {
-            Gdx.app.log("EntityManager", "Failed to activate entity. Entity not found in inactive list.");
-        }
+         }
     }
 
     public List<Entities> getInactiveEntitiesList() {

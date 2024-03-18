@@ -27,8 +27,6 @@ public class AIControlManager {
         // Rest of the constructor...
     }
 
-
-
     public void updateEntityManagement(float deltaTime) {
         timeSinceLastEntity += deltaTime;
 
