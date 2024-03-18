@@ -18,14 +18,6 @@ public class EntityManager {
     private Texture fitManTexture;
     private Texture skinnyManTexture;
     private Texture fatManTexture;
-    private Texture burgerTexture;
-    private Texture cookedchickenTexture;
-    private Texture frenchfriesTexture;
-    private Texture fruitTexture;
-    private Texture hotdogTexture;
-    private Texture pizzaTexture;
-    private Texture saladTexture;
-
 
     public EntityManager() {
         entitiesList = new ArrayList<>();
@@ -52,11 +44,6 @@ public class EntityManager {
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Fruit.png", 0.125f));
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Salad.png", 0.25f));
         Collections.shuffle(inactiveEntitiesList);
-
-    }
-
-    public void addEntity(Entities entity) {
-        entitiesList.add(entity);
     }
 
     public void activateEntity(Entities entity) {
@@ -68,9 +55,6 @@ public class EntityManager {
     public List<Entities> getInactiveEntitiesList() {
         return this.inactiveEntitiesList; // Return the list of inactive entities
     }
-//    public void removeEntity(Entities entity) {
-//        entitiesList.remove(entity);
-//    }
 
     public List<Entities> getEntitiesList() {
         return entitiesList; // This method was missing and needs to be added
@@ -86,33 +70,6 @@ public class EntityManager {
 
     public Texture getFatManTexture() {
         return fatManTexture;
-    }
-    public Texture getBurgerTexture(){
-        return burgerTexture;
-    }
-
-    public Texture getFrenchfriesTexture() {
-        return frenchfriesTexture;
-    }
-
-    public Texture getFruitTexture() {
-        return fruitTexture;
-    }
-
-    public Texture getHotdogTexture() {
-        return hotdogTexture;
-    }
-
-    public Texture getSaladTexture() {
-        return saladTexture;
-    }
-
-    public Texture getPizzaTexture() {
-        return pizzaTexture;
-    }
-
-    public Texture getCookedchickenTexture() {
-        return cookedchickenTexture;
     }
 
     public void renderEntitiesWithScaling(SpriteBatch batch) {

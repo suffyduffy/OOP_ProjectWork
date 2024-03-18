@@ -30,7 +30,6 @@ public class AIControlManager {
     public void updateEntityManagement(float deltaTime) {
         timeSinceLastEntity += deltaTime;
 
-
         // Check if enough time has passed to activate the next entity
         if (timeSinceLastEntity >= timeBetweenEntities) {
             if (nextEntityIndex < entityManager.getInactiveEntitiesList().size()) {
