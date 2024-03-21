@@ -13,6 +13,7 @@ public class EntityManager {
     private List<Entities> entitiesList;
     private List<Entities> inactiveEntitiesList; // Entities waiting to be activated
 
+    private boolean renderEntities = true;
 
     // Texture variables
     private Texture fitManTexture;
@@ -23,6 +24,10 @@ public class EntityManager {
         entitiesList = new ArrayList<>();
         inactiveEntitiesList = new ArrayList<>(); // Initialize the list
         loadTextures(); // Load textures upon EntityManager creation
+    }
+
+    public void setRenderEntities(boolean render) {
+        this.renderEntities = render;
     }
 
     // Method to load textures
@@ -73,8 +78,11 @@ public class EntityManager {
     }
 
     public void renderEntitiesWithScaling(SpriteBatch batch) {
-        for (Entities entity : entitiesList) {
-            entity.render(batch); // Assuming each entity knows how to render itself with scaling
+        if(renderEntities)
+        {
+            for (Entities entity : entitiesList) {
+                entity.render(batch); // Assuming each entity knows how to render itself with scaling
+            }
         }
     }
 
@@ -96,6 +104,9 @@ public class EntityManager {
             playerTexture = gameManager.fatManTexture;
         }
         return playerTexture.getWidth();
+    }
+
+    public void update(float delta) {
     }
 
     // ... any additional methods ...

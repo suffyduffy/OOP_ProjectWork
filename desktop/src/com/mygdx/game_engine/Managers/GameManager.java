@@ -142,7 +142,7 @@ public class GameManager extends Game {
         }
 
         // Check if the current scene is not StartScene before adding entities
-        if (!(currentScene instanceof MenuScene)) {
+        if ((currentScene instanceof GameScene)) {
             aiControlManager.updateEntityManagement(deltaTime);
             aiControlManager.updateEntities(deltaTime, playerPosition, playerScaleX, playerScaleY);
         }

@@ -17,9 +17,9 @@ public class MenuScene extends Scene {
     private Skin skin;
     private AssetManager assetManager;
     private SceneManager sceneManager;
-
+    private Music music;
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
-        super("Scenes/mainMenu.jpg", entityManager);
+        super("Scenes/mainMenu.jpg", entityManager, sceneManager);
         stage = new Stage();
         this.sceneManager = sceneManager;
         //sceneManager = new SceneManager();
@@ -91,6 +91,10 @@ public class MenuScene extends Scene {
         super.dispose(); // Dispose of the background texture
         stage.dispose();
         skin.dispose();
+        if (music != null) {
+            music.stop();
+            music.dispose();
+        }
 
     }
 

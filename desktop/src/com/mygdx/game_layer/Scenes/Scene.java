@@ -2,22 +2,20 @@ package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game_engine.Managers.EntityManager;
-import com.mygdx.game_layer.Objects.Entities;
-import com.mygdx.game_layer.Objects.HealthyFoodItem;
-import com.mygdx.game_layer.Objects.TexturedObject;
-import com.mygdx.game_layer.Objects.UnhealthyFoodItem;
-
-import java.util.List;
+import com.mygdx.game_engine.Managers.SceneManager;
 
 public abstract class Scene {
     private Texture backgroundTexture;
     private EntityManager entityManager;
 
-    public Scene(String backgroundImagePath, EntityManager entityManager) {
+    public Scene(String backgroundImagePath, EntityManager entityManager, SceneManager sceneManager) {
         this.backgroundTexture = new Texture(backgroundImagePath);
         this.entityManager = entityManager;
+    }
+
+    public Scene() {
+
     }
 
     public abstract void update(float delta);
