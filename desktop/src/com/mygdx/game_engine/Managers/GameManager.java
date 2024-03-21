@@ -26,6 +26,7 @@ public class GameManager extends Game {
     private SpriteBatch batch;
     private Music music;
     private Timer gameTimer; // New timer field
+    private int healthyFoodEaten = 0;
 
     Texture fitManTexture;
     Texture skinnyManTexture;
@@ -104,6 +105,9 @@ public class GameManager extends Game {
                 // Render the timer at the top right corner
                 font.draw(batch, "Time: " + (int) gameTimer.getTimeRemaining(), Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 20);
 
+                //Render the scoreboard
+                font.draw(batch, "Healthy Foods: " + healthyFoodEaten, 20, Gdx.graphics.getHeight() - 50);
+
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
                     // Render "You Lose" text
@@ -165,7 +169,9 @@ public class GameManager extends Game {
         gameTimer.stop();
         // Other stop game actions...
     }
-
+    public void increaseHealthyFoodEaten() {
+        this.healthyFoodEaten++;
+    }
     @Override
     public void dispose() {
         if (sceneManager.getCurrentScene() != null) {

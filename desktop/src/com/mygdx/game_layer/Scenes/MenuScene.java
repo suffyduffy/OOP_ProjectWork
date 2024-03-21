@@ -42,7 +42,7 @@ public class MenuScene extends Scene {
                 // Handle button 1 click event
                 Gdx.app.log("Start Game", "Clicked");
                 if (sceneManager != null) {
-                    GameScene gameScene = new GameScene(entityManager);
+                    GameScene gameScene = new GameScene(entityManager, sceneManager);
                     sceneManager.setCurrentScene(gameScene);
                     music.dispose();
                 }

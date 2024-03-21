@@ -59,6 +59,7 @@ public class PlayerControlManager {
                     if (entity instanceof HealthyFoodItem) {
                         gameManager.isSkinny = true;
                         gameManager.isFat = false;
+                        gameManager.increaseHealthyFoodEaten(); // This is the new method call
                     } else if (entity instanceof UnhealthyFoodItem) {
                         gameManager.isSkinny = false;
                         gameManager.isFat = true;

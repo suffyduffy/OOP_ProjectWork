@@ -39,4 +39,7 @@ public class Timer {
     public float getTimeRemaining() {
         return timeRemaining;
     }
+
+    public void pause() {
+    }
 }
