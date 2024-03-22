@@ -106,7 +106,7 @@ public class GameManager extends Game {
                 font.draw(batch, "Time: " + (int) gameTimer.getTimeRemaining(), Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 20);
 
                 //Render the scoreboard
-                font.draw(batch, "Healthy Foods: " + healthyFoodEaten, 20, Gdx.graphics.getHeight() - 50);
+                font.draw(batch, "Healthy Foods: " + healthyFoodEaten, 20, Gdx.graphics.getHeight() - 20);
 
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
