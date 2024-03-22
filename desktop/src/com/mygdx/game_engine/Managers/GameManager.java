@@ -37,6 +37,7 @@ public class GameManager extends Game {
     boolean isFat = false;
     float playerScaleX = 1.0f; // Default scale factor for width
     float playerScaleY = 1.0f; // Default scale factor for height
+    float timecount = 100;
     private BitmapFont font; // Font for text rendering
 
     @Override
@@ -162,6 +163,7 @@ public class GameManager extends Game {
         if (gameTimer.getTimeRemaining() <= 0) {
             stopGame();
         }
+
     }
 
     private void stopGame() {
@@ -170,8 +172,17 @@ public class GameManager extends Game {
         // Other stop game actions...
     }
     public void increaseHealthyFoodEaten() {
+        //healthy food + 1 when eaten
         this.healthyFoodEaten++;
+        this.gameTimer.addTime(3); // Add 5 seconds to the timer
     }
+
+    public void decreaseUnhealthyFoodEaten() {
+        //healthy food - 1 when eaten
+        //this.healthyFoodEaten++;
+        this.gameTimer.minusTime(10); // Subtract 10 seconds to the timer
+    }
+
     @Override
     public void dispose() {
         if (sceneManager.getCurrentScene() != null) {

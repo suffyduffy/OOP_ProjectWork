@@ -32,6 +32,16 @@ public class Timer {
         }
     }
 
+    // Adds time to the timer
+    public void addTime(float amount) {
+        this.timeRemaining += amount;
+    }
+
+    public void minusTime(float amount) {
+        this.timeRemaining -= amount;
+    }
+
+
     public boolean isRunning() {
         return isRunning;
     }
@@ -42,4 +52,5 @@ public class Timer {
 
     public void pause() {
     }
+
 }

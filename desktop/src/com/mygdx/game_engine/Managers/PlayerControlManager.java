@@ -63,6 +63,7 @@ public class PlayerControlManager {
                     } else if (entity instanceof UnhealthyFoodItem) {
                         gameManager.isSkinny = false;
                         gameManager.isFat = true;
+                        gameManager.decreaseUnhealthyFoodEaten(); // For decrease of Timer when eat unhealthy
                     }
                     // Reposition the entity to the top
                     float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
