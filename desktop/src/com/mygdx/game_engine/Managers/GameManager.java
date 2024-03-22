@@ -87,19 +87,19 @@ public class GameManager extends Game {
             // Draw player only if in the game scene
             if (currentScene instanceof GameScene) {
                 Texture playerTexture = fitManTexture;
-                float scaleX = 0.55f; // Default scale factor for width
-                float scaleY = 0.55f; // Default scale factor for height
+                float scaleX = 0.4f; // Default scale factor for width
+                float scaleY = 0.4f; // Default scale factor for height
 
                 if (isSkinny) {
                     playerTexture = skinnyManTexture;
                     // Define scale factors for the skinny state, for example:
-                    scaleX = 0.5f;
-                    scaleY = 0.5f;
+                    scaleX = 0.4f;
+                    scaleY = 0.4f;
                 } else if (isFat) {
                     playerTexture = fatManTexture;
                     // Define scale factors for the fat state, for example:
-                    scaleX = 0.6f;
-                    scaleY = 0.6f;
+                    scaleX = 0.4f;
+                    scaleY = 0.4f;
                 }
 
                 // Render the timer at the top right corner
@@ -130,15 +130,15 @@ public class GameManager extends Game {
 
         // Update the scale factors based on the player's state
         if (isSkinny) {
-            playerScaleX = 0.5f;
-            playerScaleY = 0.5f;
+            playerScaleX = 0.4f;
+            playerScaleY = 0.4f;
         } else if (isFat) {
-            playerScaleX = 0.6f; // Assuming you want the fat state to be slightly larger
-            playerScaleY = 0.6f;
+            playerScaleX = 0.4f; // Assuming you want the fat state to be slightly larger
+            playerScaleY = 0.4f;
         } else {
             // Reset to default scale if neither skinny nor fat
-            playerScaleX = 0.55f;
-            playerScaleY = 0.55f;
+            playerScaleX = 0.4f;
+            playerScaleY = 0.4f;
         }
 
         // Check if the current scene is not StartScene before adding entities

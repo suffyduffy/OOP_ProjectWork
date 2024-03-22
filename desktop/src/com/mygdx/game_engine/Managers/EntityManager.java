@@ -40,14 +40,15 @@ public class EntityManager {
 
     public void initializeFoodItems() {
         // Instantiate and categorize food items
-        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Burger.png", 0.25f)); // Assuming constructor takes texture path and scale factor
+        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Burger.png", 0.125f)); // Assuming constructor takes texture path and scale factor
         // ... add other food items similarly
-        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/FrenchFries.png", 0.25f));
-        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Hotdog.png", 0.25f));
-        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Pizza.png", 0.25f));
+        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/FrenchFries.png", 0.125f));
+        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Hotdog.png", 0.125f));
+        inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Pizza.png", 0.125f));
         inactiveEntitiesList.add(new HealthyFoodItem("Food/CookedChicken.png", 0.125f));
         inactiveEntitiesList.add(new HealthyFoodItem("Food/Fruit.png", 0.125f));
-        inactiveEntitiesList.add(new HealthyFoodItem("Food/Salad.png", 0.25f));
+        inactiveEntitiesList.add(new HealthyFoodItem("Food/Salad.png", 0.125f));
+        inactiveEntitiesList.add(new HealthyFoodItem("Food/Water.png", 0.125f));
         Collections.shuffle(inactiveEntitiesList);
     }
 

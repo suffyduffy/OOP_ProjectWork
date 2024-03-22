@@ -61,7 +61,7 @@ public class AIControlManager {
 
                 // Reset the position to the top once it reaches the bottom
                 if (texturedObject.getPosition().y < 0) {
-                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() - texturedObject.getTexture().getWidth());
+                    float initialX = random.nextFloat() * (Gdx.graphics.getWidth() );
                     texturedObject.setPosition(initialX, Gdx.graphics.getHeight());
                 }
             }
