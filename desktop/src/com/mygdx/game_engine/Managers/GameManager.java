@@ -35,6 +35,7 @@ public class GameManager extends Game {
     Vector2 playerPosition;
     boolean isSkinny = false;
     boolean isFat = false;
+    boolean facingRight = true;
     float playerScaleX = 1.0f; // Default scale factor for width
     float playerScaleY = 1.0f; // Default scale factor for height
     float timecount = 100;
@@ -119,7 +120,7 @@ public class GameManager extends Game {
                 batch.draw(playerTexture,
                         playerPosition.x,
                         playerPosition.y,
-                        playerTexture.getWidth() * scaleX,
+                        playerTexture.getWidth() * scaleX * (facingRight ? 1 : -1), // This will flip the texture if facingLeft is false
                         playerTexture.getHeight() * scaleY);
             }
         }
@@ -179,7 +180,7 @@ public class GameManager extends Game {
 
     public void decreaseUnhealthyFoodEaten() {
         //healthy food - 1 when eaten
-        //this.healthyFoodEaten++;
+        //this.healthyFoodEaten--;
         this.gameTimer.minusTime(10); // Subtract 10 seconds to the timer
     }
 

@@ -35,12 +35,14 @@ public class PlayerControlManager {
 
         // Move player left
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            gameManager.facingRight = false;
             gameManager.playerPosition.x -= playerSpeed * deltaTime;
             // Ensure player does not go beyond left screen border
             gameManager.playerPosition.x = Math.max(0, gameManager.playerPosition.x);
         }
         // Move player right
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            gameManager.facingRight = true;
             float playerWidth = gameManager.entityManager.getPlayerWidth(gameManager);
             gameManager.playerPosition.x += playerSpeed * deltaTime;
             // Ensure player does not go beyond right screen border
