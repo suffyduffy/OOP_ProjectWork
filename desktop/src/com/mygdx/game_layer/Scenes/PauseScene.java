@@ -24,79 +24,69 @@ class PauseScene extends Scene{
         super("Scenes/mainMenu.jpg", entityManager, sceneManager);
         stage = new Stage();
         this.sceneManager = sceneManager;
-        // Load and play music
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
-        music.setLooping(true);
-        music.play();
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        // Initialize music and start playing
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
+        this.music.setLooping(true);
+        this.music.play();
 
-
-
-
-        //Load button skin
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
-
-        //Create buttons for pause scene
-
-        //create resume button
-//        TextButton resumeButton = new TextButton("Resume", skin);
-//        resumeButton.setPosition(300, 450);
-//        resumeButton.setSize(200, 50);
-//        resumeButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Start Game", "Clicked"); //Checking msg
-//                if (sceneManager != null) {
-//                    GameScene gameScene = new GameScene(entityManager, sceneManager);
-//                    sceneManager.setCurrentScene(gameScene);
-//                    //music.dispose();
-//                }
-//            }
-//        });
+        // Load button skin
+        this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
 //create resume button
         TextButton resumeButton = new TextButton("Resume", skin);
-        resumeButton.setPosition(300, 350); // Set button position
+        resumeButton.setPosition(600, 100); // Set button position
         resumeButton.setSize(200, 50); // Set button size
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Pause Scene", "Clicked"); //Checking msg
+                Gdx.app.log("Game Scene", "Clicked and resume"); //Checking msg
                 entityManager.setRenderEntities(true); // Resume rendering entities
+
+                // Get the current game scene from your SceneManager and set it as the current scene
+                GameScene gameScene = sceneManager.getCurrentGameScene();
+                if (gameScene != null) {
+                    gameScene.resume(); // Make sure to call the resume method if needed
+                    sceneManager.setCurrentScene(gameScene);
+                } else {
+                    // Handle the situation where the gameScene is null
+                    Gdx.app.log("PauseScene", "No current game scene to resume.");
+                }
             }
         });
 
-
-//        //create instruction button
-//        TextButton instructionButton = new TextButton("Instruction", skin);
-//        instructionButton.setPosition(300, 250); // Set button position
-//        instructionButton.setSize(200, 50); // Set button size
-//        instructionButton.addListener(new ClickListener() {
+//// Create the "Menu" button
+//        TextButton menuButton = new TextButton("Menu", skin);
+//        menuButton.setPosition(700, 75); // Set the button's position on the screen
+//        menuButton.setSize(200, 50); // Set the button's size
+//        menuButton.addListener(new ClickListener() {
 //            @Override
 //            public void clicked(InputEvent event, float x, float y) {
-//                //testing the button
-//                Gdx.app.log("quit", "Clicked");
-//                Gdx.app.exit();
+//                Gdx.app.log("PauseScene", "Menu button clicked");
+//                MenuScene menuScene = new MenuScene(entityManager, sceneManager);
+//                sceneManager.setCurrentScene(menuScene);
+////                menuScene.resetGame();
 //            }
 //        });
 
         //create quit button
         TextButton quitButton = new TextButton("Quit", skin);
-        quitButton.setPosition(300, 250); // Set button position
+        quitButton.setPosition(600, 0); // Set button position
         quitButton.setSize(200, 50); // Set button size
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //testing the button
-                Gdx.app.log("quit", "Clicked");
+                Gdx.app.log("quit", "Quit button clicked");
                 Gdx.app.exit();
             }
         });
         // Add buttons to the stage
-//        stage.addActor(resumeButton);
         stage.addActor(resumeButton);
-//        stage.addActor(instructionButton);
+//        stage.addActor(menuButton);
         stage.addActor(quitButton);
-        
+
     }
 
     public void update(float delta) {

@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
+import com.mygdx.game_layer.Objects.Score;
+import com.mygdx.game_layer.Objects.Timer;
 
 public class MenuScene extends Scene {
     private Stage stage;
@@ -18,6 +20,9 @@ public class MenuScene extends Scene {
     private AssetManager assetManager;
     private SceneManager sceneManager;
     private Music music;
+    private EntityManager entityManager;
+    private Timer timer;
+    private Score score;
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/mainMenu.jpg", entityManager, sceneManager);
         stage = new Stage();
@@ -85,6 +90,16 @@ public class MenuScene extends Scene {
 
         batch.begin(); // Begin the sprite batch again after drawing the stage
     }
+
+//    public void resetGame() {
+//        // Reset entities (like food items)
+//        entityManager.resetFoodItems(); // Assuming entityManager has a method to reset entities
+//        // Reset the timer
+//        timer.reset(100); // Reset the game timer if there's a reset method
+//        // Reset the score
+//        score.reset(); // Assuming there's a score manager with a reset method
+//
+//    }
 
     @Override
     public void dispose() {

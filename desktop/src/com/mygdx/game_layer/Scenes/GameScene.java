@@ -32,16 +32,11 @@ public class GameScene extends Scene {
     }
 
     private void switchToPauseScene() {
-        //isPaused = true;  // Set the game to paused
-
-        if (isPaused = true)
-        {
-            entityManager.setRenderEntities(false); // Stop rendering entities
-            PauseScene pauseScene = new PauseScene(entityManager, sceneManager);
-            sceneManager.setCurrentScene(pauseScene);
-            music.pause(); // Stop music when switching to pause scene
-        }
-
+        isPaused = true; // Make sure this is set correctly, without typo like `isPaused = true`
+        entityManager.setRenderEntities(false); // Stop rendering entities
+        PauseScene pauseScene = new PauseScene(entityManager, sceneManager);
+        sceneManager.setCurrentScene(pauseScene);
+        music.pause(); // Stop music when switching to pause scene
     }
 
     @Override
@@ -65,6 +60,12 @@ public class GameScene extends Scene {
 
             }
         }
+    }
+
+    public void resume() {
+        isPaused = false;
+        entityManager.setRenderEntities(true); // Start rendering entities again.
+        music.play(); // Resume the music if it was paused.
     }
 
     @Override
