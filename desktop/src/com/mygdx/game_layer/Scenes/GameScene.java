@@ -18,10 +18,20 @@ public class GameScene extends Scene {
         this.entityManager = entityManager;
         this.sceneManager = sceneManager;
         Gdx.app.log("GameScene", "Constructor called");
-        // Load and play music
-        music = Gdx.audio.newMusic(Gdx.files.internal("Music/Hey Kids Remake.WAV"));
-        music.setLooping(true);
-        music.play();
+
+        /*if(music != null)
+        {
+            music.dispose();
+            music = null;
+        }
+        else
+        {
+            // Load and play music
+            music = Gdx.audio.newMusic(Gdx.files.internal("Music/Mamak.mp3"));
+            music.setLooping(true);
+            music.play();
+        }*/
+
     }
 
     @Override
@@ -32,11 +42,16 @@ public class GameScene extends Scene {
     }
 
     private void switchToPauseScene() {
-        isPaused = true; // Make sure this is set correctly, without typo like `isPaused = true`
-        entityManager.setRenderEntities(false); // Stop rendering entities
-        PauseScene pauseScene = new PauseScene(entityManager, sceneManager);
-        sceneManager.setCurrentScene(pauseScene);
-        music.pause(); // Stop music when switching to pause scene
+        //isPaused = true;  // Set the game to paused
+
+        if (isPaused = true)
+        {
+            entityManager.setRenderEntities(false); // Stop rendering entities
+            PauseScene pauseScene = new PauseScene(entityManager, sceneManager);
+            sceneManager.setCurrentScene(pauseScene);
+            //music.dispose(); // Stop music when switching to pause scene
+        }
+
     }
 
     @Override
@@ -44,7 +59,6 @@ public class GameScene extends Scene {
         super.render(batch);  // This draws the background texture
         if (!isPaused) {
             // Place rendering logic for entities here
-            // For example, entityManager.renderEntitiesWithScaling(batch);
             entityManager.renderEntitiesWithScaling(batch);
             entityManager.setRenderEntities(true);
 
@@ -55,17 +69,7 @@ public class GameScene extends Scene {
             Gdx.app.log("GameScene", "Attempting to switch to PauseScene");
             isPaused = true;
             switchToPauseScene();
-            if (isPaused){
-                Gdx.app.log("GameScene", "pausescene");
-
-            }
         }
-    }
-
-    public void resume() {
-        isPaused = false;
-        entityManager.setRenderEntities(true); // Start rendering entities again.
-        music.play(); // Resume the music if it was paused.
     }
 
     @Override

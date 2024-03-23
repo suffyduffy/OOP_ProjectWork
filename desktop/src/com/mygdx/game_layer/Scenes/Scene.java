@@ -18,6 +18,9 @@ public abstract class Scene {
 
     }
 
+    public Scene(String s, SceneManager sceneManager) {
+    }
+
     public abstract void update(float delta);
 
     public void render(SpriteBatch batch) {
