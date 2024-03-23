@@ -1,4 +1,4 @@
-package com.mygdx.game_layer.Objects;
+package com.mygdx.game_layer.Utils;
 
 import java.io.*;
 

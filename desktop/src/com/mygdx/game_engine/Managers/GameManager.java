@@ -13,6 +13,8 @@ import com.mygdx.game_layer.Scenes.MenuScene;
 import com.mygdx.game_layer.Scenes.Scene;
 import com.mygdx.game_layer.Scenes.GameScene;
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game_layer.Utils.Score;
+import com.mygdx.game_layer.Utils.Timer;
 
 
 public class GameManager extends Game {

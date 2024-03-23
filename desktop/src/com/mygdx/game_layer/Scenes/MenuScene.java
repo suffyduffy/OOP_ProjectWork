@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
-import com.mygdx.game_layer.Objects.Score;
-import com.mygdx.game_layer.Objects.Timer;
 
 public class MenuScene extends Scene {
     private Stage stage;
@@ -20,8 +18,6 @@ public class MenuScene extends Scene {
     private SceneManager sceneManager;
     private Music music;
     private EntityManager entityManager;
-    private Timer timer;
-    private Score score;
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/mainMenu2.jpg", entityManager, sceneManager);
         this.stage = new Stage();
