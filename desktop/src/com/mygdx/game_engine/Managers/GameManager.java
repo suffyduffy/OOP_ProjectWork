@@ -67,7 +67,7 @@ public class GameManager extends Game {
         // Initialize font
         font = new BitmapFont(Gdx.files.internal("Skins/custom.fnt"),
                 Gdx.files.internal("Skins/custom.png"), false);
-        font.setColor(Color.BLACK);
+        font.setColor(Color.RED);
 
         // Initialize scoreboard
         score = new Score();
@@ -173,6 +173,7 @@ public class GameManager extends Game {
         gameTimer.reset(timeCount);
         entityManager.setRenderEntities(false);
         Texture playerTexture = fitManTexture;
+        score = new Score();
         isSkinny = false;
         isFat = false;
 

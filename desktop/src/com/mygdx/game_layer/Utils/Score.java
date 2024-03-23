@@ -19,7 +19,5 @@ public class Score {
     public int getHealthyFoodEaten() {
         return healthyFoodEaten;
     }
-    public int getHighScore() {
-        return highScore;
-    }
+
 }
