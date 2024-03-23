@@ -53,4 +53,8 @@ public class Timer {
     public void pause() {
     }
 
+    public boolean isTimeUp() {
+        return !isRunning && timeRemaining <= 0;
+    }
+
 }

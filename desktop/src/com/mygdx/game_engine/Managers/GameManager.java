@@ -26,7 +26,8 @@ public class GameManager extends Game {
     private SpriteBatch batch;
     private Music music;
     private Timer gameTimer; // New timer field
-    private int healthyFoodEaten = 0;
+
+    private Score score;
 
     Texture fitManTexture;
     Texture skinnyManTexture;
@@ -73,6 +74,8 @@ public class GameManager extends Game {
         font = new BitmapFont();
         font.setColor(Color.BLACK);
 
+        score = new Score();
+
     }
 
     @Override
@@ -108,7 +111,7 @@ public class GameManager extends Game {
                 font.draw(batch, "Time: " + (int) gameTimer.getTimeRemaining(), Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 20);
 
                 //Render the scoreboard
-                font.draw(batch, "Healthy Foods: " + healthyFoodEaten, 20, Gdx.graphics.getHeight() - 20);
+                font.draw(batch, "Healthy Foods: " + score.getHealthyFoodEaten(), 20, Gdx.graphics.getHeight() - 20);
 
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
@@ -129,7 +132,11 @@ public class GameManager extends Game {
 
     private void update(float deltaTime) {
         Scene currentScene = sceneManager.getCurrentScene();
+        gameTimer.update(deltaTime);
 
+        if (gameTimer.isTimeUp()) {
+            stopGame();
+        }
         // Update the scale factors based on the player's state
         if (isSkinny) {
             playerScaleX = 0.4f;
@@ -158,13 +165,6 @@ public class GameManager extends Game {
         if (currentScene instanceof GameScene && !gameTimer.isRunning()) {
             gameTimer.start();
         }
-
-        // Timer logic remains here...
-        gameTimer.update(deltaTime);
-        if (gameTimer.getTimeRemaining() <= 0) {
-            stopGame();
-        }
-
     }
 
     private void stopGame() {
@@ -174,13 +174,12 @@ public class GameManager extends Game {
     }
     public void increaseHealthyFoodEaten() {
         //healthy food + 1 when eaten
-        this.healthyFoodEaten++;
+        score.increaseHealthyFoodEaten();
         this.gameTimer.addTime(3); // Add 5 seconds to the timer
     }
 
     public void decreaseUnhealthyFoodEaten() {
-        //healthy food - 1 when eaten
-        //this.healthyFoodEaten--;
+//        score.decreaseUnhealthyFoodEaten();
         this.gameTimer.minusTime(10); // Subtract 10 seconds to the timer
     }
 
