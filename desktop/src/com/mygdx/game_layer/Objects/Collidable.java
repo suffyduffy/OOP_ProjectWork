@@ -1,7 +1,10 @@
 package com.mygdx.game_layer.Objects;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.mygdx.game_engine.Interface.ControlledEntity;
+
+import java.awt.*;
 
 public class Collidable implements ControlledEntity {
 
@@ -28,4 +31,24 @@ public class Collidable implements ControlledEntity {
         return playerRight >= foodLeft && playerLeft <= foodRight &&
                 playerTop >= foodBottom && playerBottom <= foodTop;
     }
+
+    @Override
+    public void update(float deltaTime) {
+
+    }
+    @Override
+    public void handleInput(InputEvent inputEvent) {
+
+    }
+
+    @Override
+    public void render(Graphics2D g) {
+
+    }
+
+    @Override
+    public boolean collidesWith(ControlledEntity otherEntity) {
+        return false;
+    }
+
 }
