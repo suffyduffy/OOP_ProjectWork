@@ -112,7 +112,7 @@ public class GameManager extends Game {
                     // Change scene
                     GameOverScene gameOverScene = new GameOverScene(entityManager, sceneManager);
                     sceneManager.setCurrentScene(gameOverScene);
-                    resetGameTime();
+                    resetGame();
                 }
 
                 // Apply scale factors when drawing the texture
@@ -168,10 +168,14 @@ public class GameManager extends Game {
         gameTimer.stop();
         entityManager.setRenderEntities(false);
     }
-    private void resetGameTime() {
+    private void resetGame() {
         // Reset the game timer to its initial value
         gameTimer.reset(timeCount);
         entityManager.setRenderEntities(false);
+        Texture playerTexture = fitManTexture;
+        isSkinny = false;
+        isFat = false;
+
     }
     public void increaseHealthyFoodEaten() {
         //healthy food + 1 when eaten
