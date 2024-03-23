@@ -8,10 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
-import com.mygdx.game_engine.Managers.GameManager;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game_layer.Objects.HealthyFoodItem;
 
 
 class PauseScene extends Scene{
@@ -21,39 +19,15 @@ class PauseScene extends Scene{
     private Music music;
     public PauseScene(EntityManager entityManager, SceneManager sceneManager)
     {
-        super("Scenes/mainMenu.jpg", entityManager, sceneManager);
+        super("Scenes/pausebg.jpg", entityManager, sceneManager);
         stage = new Stage();
-        this.sceneManager = sceneManager;
-        // Load and play music
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
-        music.setLooping(true);
-        music.play();
-
-
-
+        sceneManager = sceneManager;
+        Gdx.input.setInputProcessor(stage);
 
         //Load button skin
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
-
-        //Create buttons for pause scene
+        this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
         //create resume button
-//        TextButton resumeButton = new TextButton("Resume", skin);
-//        resumeButton.setPosition(300, 450);
-//        resumeButton.setSize(200, 50);
-//        resumeButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("Start Game", "Clicked"); //Checking msg
-//                if (sceneManager != null) {
-//                    GameScene gameScene = new GameScene(entityManager, sceneManager);
-//                    sceneManager.setCurrentScene(gameScene);
-//                    //music.dispose();
-//                }
-//            }
-//        });
-
-//create resume button
         TextButton resumeButton = new TextButton("Resume", skin);
         resumeButton.setPosition(300, 350); // Set button position
         resumeButton.setSize(200, 50); // Set button size
@@ -64,20 +38,6 @@ class PauseScene extends Scene{
                 entityManager.setRenderEntities(true); // Resume rendering entities
             }
         });
-
-
-//        //create instruction button
-//        TextButton instructionButton = new TextButton("Instruction", skin);
-//        instructionButton.setPosition(300, 250); // Set button position
-//        instructionButton.setSize(200, 50); // Set button size
-//        instructionButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                //testing the button
-//                Gdx.app.log("quit", "Clicked");
-//                Gdx.app.exit();
-//            }
-//        });
 
         //create quit button
         TextButton quitButton = new TextButton("Quit", skin);
@@ -92,15 +52,26 @@ class PauseScene extends Scene{
             }
         });
         // Add buttons to the stage
-//        stage.addActor(resumeButton);
         stage.addActor(resumeButton);
-//        stage.addActor(instructionButton);
         stage.addActor(quitButton);
         
     }
 
+    /*public void checkMusic()
+    {
+        //checkMusic();
+        if (music != null) {
+            music.stop();
+            music.dispose();
+            music = null; // Set music to null to avoid attempting to dispose it again later
+        }
+        else {
+            Gdx.app.error("MyTag", "my error message");
+        }
+    }*/
     public void update(float delta) {
         stage.act(delta); // Update the stage
+        //checkMusic();
     }
 
     public void render(SpriteBatch batch) {
@@ -120,10 +91,10 @@ class PauseScene extends Scene{
         super.dispose();
         stage.dispose();
         skin.dispose();
-        // Dispose of the music
         if (music != null) {
             music.stop();
             music.dispose();
+            music = null; // Set music to null to avoid attempting to dispose it again later
         }
     }
 }

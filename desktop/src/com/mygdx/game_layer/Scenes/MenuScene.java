@@ -20,15 +20,15 @@ public class MenuScene extends Scene {
     private Music music;
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/mainMenu.jpg", entityManager, sceneManager);
-        stage = new Stage();
+        this.stage = new Stage();
         this.sceneManager = sceneManager;
         //sceneManager = new SceneManager();
-        Gdx.input.setInputProcessor(stage); // Set the stage as the input processor
-        Music music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
-        music.setLooping(true);
-        music.play();
+        Gdx.input.setInputProcessor(this.stage); // Set the stage as the input processor
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
+        this.music.setLooping(true);
+        this.music.play();
         // Load skin
-        skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
+        this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
         // Create first button
         TextButton button1 = new TextButton("Start Game", skin);
@@ -42,9 +42,15 @@ public class MenuScene extends Scene {
                 // Handle button 1 click event
                 Gdx.app.log("Start Game", "Clicked");
                 if (sceneManager != null) {
-                    GameScene gameScene = new GameScene(entityManager, sceneManager);
-                    sceneManager.setCurrentScene(gameScene);
-                    music.dispose();
+                    /*GameScene gameScene = new GameScene(entityManager, sceneManager);
+                    sceneManager.setCurrentScene(gameScene);*/
+                    InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
+                    sceneManager.setCurrentScene(instructionScene1);
+                    if (music != null) {
+                        music.stop();
+                        music.dispose();
+                    }
+                    //music.dispose();
                 }
             }
         });
@@ -91,10 +97,7 @@ public class MenuScene extends Scene {
         super.dispose(); // Dispose of the background texture
         stage.dispose();
         skin.dispose();
-        if (music != null) {
-            music.stop();
-            music.dispose();
-        }
+
 
     }
 
