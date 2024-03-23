@@ -15,8 +15,6 @@ import com.mygdx.game_layer.Scenes.GameScene;
 import com.badlogic.gdx.graphics.Color;
 
 
-import static com.badlogic.gdx.math.MathUtils.random;
-
 public class GameManager extends Game {
 
     private PlayerControlManager playerControlManager;
@@ -57,6 +55,7 @@ public class GameManager extends Game {
         sceneManager.addScene(menuScene);
         sceneManager.setCurrentScene(menuScene);
 
+
         // Load additional images from EntityManager
         fitManTexture = entityManager.getFitManTexture();
         skinnyManTexture = entityManager.getSkinnyManTexture();
@@ -72,7 +71,8 @@ public class GameManager extends Game {
         gameTimer = new Timer(timeCount); // Adjust the initial time as needed
 
         // Initialize font
-        font = new BitmapFont();
+        font = new BitmapFont(Gdx.files.internal("Skins/custom.fnt"),
+                Gdx.files.internal("Skins/custom.png"), false);
         font.setColor(Color.BLACK);
 
         score = new Score();
