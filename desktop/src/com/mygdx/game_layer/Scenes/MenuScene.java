@@ -17,7 +17,6 @@ import com.mygdx.game_layer.Objects.Timer;
 public class MenuScene extends Scene {
     private Stage stage;
     private Skin skin;
-    private AssetManager assetManager;
     private SceneManager sceneManager;
     private Music music;
     private EntityManager entityManager;
@@ -36,7 +35,7 @@ public class MenuScene extends Scene {
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
         // Create first button
-        TextButton button1 = new TextButton("Start Game", skin);
+        TextButton button1 = new TextButton("Start", skin);
         button1.setPosition(300, 350); // Set button position
         button1.setSize(200, 50); // Set button size
 
@@ -97,15 +96,6 @@ public class MenuScene extends Scene {
         batch.begin(); // Begin the sprite batch again after drawing the stage
     }
 
-//    public void resetGame() {
-//        // Reset entities (like food items)
-//        entityManager.resetFoodItems(); // Assuming entityManager has a method to reset entities
-//        // Reset the timer
-//        timer.reset(100); // Reset the game timer if there's a reset method
-//        // Reset the score
-//        score.reset(); // Assuming there's a score manager with a reset method
-//
-//    }
 
     @Override
     public void dispose() {
@@ -116,5 +106,4 @@ public class MenuScene extends Scene {
 
     }
 
-    // Add other methods specific to the start scene if necessary
 }

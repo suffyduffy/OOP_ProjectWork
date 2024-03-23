@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game_layer.Objects.*;
+import com.mygdx.game_layer.Scenes.GameOverScene;
 import com.mygdx.game_layer.Scenes.MenuScene;
 import com.mygdx.game_layer.Scenes.Scene;
 import com.mygdx.game_layer.Scenes.GameScene;
@@ -39,7 +40,7 @@ public class GameManager extends Game {
     boolean facingRight = true;
     float playerScaleX = 1.0f; // Default scale factor for width
     float playerScaleY = 1.0f; // Default scale factor for height
-    float timecount = 100;
+    float timeCount = 20;
     private BitmapFont font; // Font for text rendering
 
     @Override
@@ -68,7 +69,7 @@ public class GameManager extends Game {
         entityManager.initializeFoodItems(); // This line initializes the food items
 
         // Initialize the timer with 10 seconds
-        gameTimer = new Timer(100); // Adjust the initial time as needed
+        gameTimer = new Timer(timeCount); // Adjust the initial time as needed
 
         // Initialize font
         font = new BitmapFont();
@@ -116,7 +117,10 @@ public class GameManager extends Game {
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
                     // Render "You Lose" text
-                    font.draw(batch, "You Lose", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
+                    //font.draw(batch, "You Lose", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
+                    GameOverScene gameOverScene = new GameOverScene(entityManager, sceneManager);
+                    sceneManager.setCurrentScene(gameOverScene);
+                    resetGameTime();
                 }
 
                 // Apply scale factors when drawing the texture
@@ -170,12 +174,17 @@ public class GameManager extends Game {
     private void stopGame() {
         // Stop the timer
         gameTimer.stop();
-        // Other stop game actions...
+        entityManager.setRenderEntities(false);
+    }
+    private void resetGameTime() {
+        // Reset the game timer to its initial value
+        gameTimer.reset(timeCount);
+        entityManager.setRenderEntities(false);
     }
     public void increaseHealthyFoodEaten() {
         //healthy food + 1 when eaten
         score.increaseHealthyFoodEaten();
-        this.gameTimer.addTime(3); // Add 5 seconds to the timer
+        this.gameTimer.addTime(3); // Add 3 seconds to the timer
     }
 
     public void decreaseUnhealthyFoodEaten() {
@@ -194,14 +203,10 @@ public class GameManager extends Game {
         if (batch != null) {
             batch.dispose();
         }
-        if (music != null) {
-            music.dispose();
-        }
+//        if (music != null) {
+//            music.dispose();
+//        }
         // No need to dispose textures here as they are managed by EntityManager
-    }
-
-    public SceneManager getSceneManager() {
-        return sceneManager;
     }
 
 }

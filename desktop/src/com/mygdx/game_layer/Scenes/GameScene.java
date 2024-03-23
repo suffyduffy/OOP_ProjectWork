@@ -14,23 +14,10 @@ public class GameScene extends Scene {
     private boolean isPaused;
 
     public GameScene(EntityManager entityManager, SceneManager sceneManager) {
-        super("Scenes/grassCute.jpg", entityManager, sceneManager);
+        super("Scenes/gameScene.jpg", entityManager, sceneManager);
         this.entityManager = entityManager;
         this.sceneManager = sceneManager;
         Gdx.app.log("GameScene", "Constructor called");
-
-        /*if(music != null)
-        {
-            music.dispose();
-            music = null;
-        }
-        else
-        {
-            // Load and play music
-            music = Gdx.audio.newMusic(Gdx.files.internal("Music/Mamak.mp3"));
-            music.setLooping(true);
-            music.play();
-        }*/
 
     }
 
@@ -49,7 +36,6 @@ public class GameScene extends Scene {
             entityManager.setRenderEntities(false); // Stop rendering entities
             PauseScene pauseScene = new PauseScene(entityManager, sceneManager);
             sceneManager.setCurrentScene(pauseScene);
-            //music.dispose(); // Stop music when switching to pause scene
         }
 
     }

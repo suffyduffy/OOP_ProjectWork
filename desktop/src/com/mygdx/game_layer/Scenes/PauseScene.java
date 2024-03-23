@@ -31,7 +31,7 @@ class PauseScene extends Scene{
         // Load button skin
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
-//create resume button
+        //create resume button
         TextButton resumeButton = new TextButton("Resume", skin);
         resumeButton.setPosition(300, 300); // Set button position
         resumeButton.setSize(200, 50); // Set button size
@@ -53,20 +53,6 @@ class PauseScene extends Scene{
             }
         });
 
-//// Create the "Menu" button
-//        TextButton menuButton = new TextButton("Menu", skin);
-//        menuButton.setPosition(700, 75); // Set the button's position on the screen
-//        menuButton.setSize(200, 50); // Set the button's size
-//        menuButton.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                Gdx.app.log("PauseScene", "Menu button clicked");
-//                MenuScene menuScene = new MenuScene(entityManager, sceneManager);
-//                sceneManager.setCurrentScene(menuScene);
-////                menuScene.resetGame();
-//            }
-//        });
-
         //create quit button
         TextButton quitButton = new TextButton("Quit", skin);
         quitButton.setPosition(300, 200); // Set button position
@@ -81,7 +67,6 @@ class PauseScene extends Scene{
         });
         // Add buttons to the stage
         stage.addActor(resumeButton);
-//        stage.addActor(menuButton);
         stage.addActor(quitButton);
 
     }
