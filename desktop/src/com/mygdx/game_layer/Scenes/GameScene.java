@@ -72,6 +72,11 @@ public class GameScene extends Scene {
         }
     }
 
+
+    public void resume() {
+        isPaused = false;
+        entityManager.setRenderEntities(true); // Start rendering entities again.
+    }
     @Override
     public void dispose() {
         // Dispose of the background texture and other resources managed by the superclass

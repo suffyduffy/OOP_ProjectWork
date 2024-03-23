@@ -21,22 +21,19 @@ class PauseScene extends Scene{
     private Music music;
     public PauseScene(EntityManager entityManager, SceneManager sceneManager)
     {
-        super("Scenes/mainMenu.jpg", entityManager, sceneManager);
+        super("Scenes/pausebg.jpg", entityManager, sceneManager);
         stage = new Stage();
         this.sceneManager = sceneManager;
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        // Initialize music and start playing
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
-        this.music.setLooping(true);
-        this.music.play();
+
 
         // Load button skin
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
 //create resume button
         TextButton resumeButton = new TextButton("Resume", skin);
-        resumeButton.setPosition(600, 100); // Set button position
+        resumeButton.setPosition(300, 300); // Set button position
         resumeButton.setSize(200, 50); // Set button size
         resumeButton.addListener(new ClickListener() {
             @Override
@@ -72,7 +69,7 @@ class PauseScene extends Scene{
 
         //create quit button
         TextButton quitButton = new TextButton("Quit", skin);
-        quitButton.setPosition(600, 0); // Set button position
+        quitButton.setPosition(300, 200); // Set button position
         quitButton.setSize(200, 50); // Set button size
         quitButton.addListener(new ClickListener() {
             @Override
@@ -110,10 +107,6 @@ class PauseScene extends Scene{
         super.dispose();
         stage.dispose();
         skin.dispose();
-        // Dispose of the music
-        if (music != null) {
-            music.stop();
-            music.dispose();
-        }
+
     }
 }
