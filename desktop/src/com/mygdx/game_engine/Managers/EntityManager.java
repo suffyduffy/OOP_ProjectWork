@@ -1,6 +1,5 @@
 package com.mygdx.game_engine.Managers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game_layer.Objects.*;
@@ -41,7 +40,6 @@ public class EntityManager {
     public void initializeFoodItems() {
         // Instantiate and categorize food items
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Burger.png", 0.125f)); // Assuming constructor takes texture path and scale factor
-        // ... add other food items similarly
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/FrenchFries.png", 0.125f));
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Hotdog.png", 0.125f));
         inactiveEntitiesList.add(new UnhealthyFoodItem("Food/Pizza.png", 0.125f));
@@ -63,7 +61,7 @@ public class EntityManager {
     }
 
     public List<Entities> getEntitiesList() {
-        return entitiesList; // This method was missing and needs to be added
+        return entitiesList;
     }
 
     public Texture getFitManTexture() {

@@ -5,7 +5,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game_layer.Objects.TexturedObject;
 
 public abstract class Entities {
     private List<TexturedObject> texturedObjects;
@@ -26,7 +25,7 @@ public abstract class Entities {
         if (!texturedObjects.isEmpty()) {
             return texturedObjects.get(0).getPosition();
         }
-        return null; // or some default value
+        return null;
     }
 
     public void setPosition(float x, float y) {

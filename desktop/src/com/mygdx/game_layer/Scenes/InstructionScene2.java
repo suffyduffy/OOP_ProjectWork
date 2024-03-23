@@ -1,4 +1,5 @@
 package com.mygdx.game_layer.Scenes;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
+
 public class InstructionScene2 extends Scene{
 
     private Stage stage;

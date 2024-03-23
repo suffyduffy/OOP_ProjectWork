@@ -22,5 +22,4 @@ public class InputOutputManager {
         texturedObjects.remove(texturedObject);
     }
 
-    // Other methods related to InputOutputManager
 }

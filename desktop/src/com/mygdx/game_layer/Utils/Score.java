@@ -1,6 +1,5 @@
 package com.mygdx.game_layer.Utils;
 
-import java.io.*;
 
 public class Score {
     private int healthyFoodEaten;

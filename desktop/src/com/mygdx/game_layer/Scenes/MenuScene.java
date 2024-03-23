@@ -1,7 +1,6 @@
 package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,7 +16,7 @@ public class MenuScene extends Scene {
     private Skin skin;
     private SceneManager sceneManager;
     private Music music;
-    private EntityManager entityManager;
+
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/mainMenu2.jpg", entityManager, sceneManager);
         this.stage = new Stage();
@@ -50,7 +49,6 @@ public class MenuScene extends Scene {
                         music.stop();
                         music.dispose();
                     }
-                    //music.dispose();
                 }
             }
         });
@@ -85,7 +83,6 @@ public class MenuScene extends Scene {
         super.render(batch); // Render the background image
         batch.end(); // End the sprite batch before drawing the stage
 
-        // Draw the buttons on top
         stage.getViewport().apply(); // Apply the stage's viewport
         stage.draw();
 

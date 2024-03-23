@@ -2,7 +2,7 @@ package com.mygdx.game_layer.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game_layer.Objects.TexturedObject;
+
 public class HealthyFoodItem extends Entities {
     private Texture texture; // Texture for this food item
 

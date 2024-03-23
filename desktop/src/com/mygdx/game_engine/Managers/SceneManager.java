@@ -19,8 +19,6 @@ public class SceneManager {
     public SceneManager() {
         scenes = new ArrayList<>();
     }
-    // In SceneManager.java
-    // And when you set the current scene to GameScene, you would do something like:
     public void setCurrentScene(Scene scene) {
         if (scene instanceof GameScene) {
             this.gameScene = (GameScene) scene; // Keep track of the game scene.
@@ -44,8 +42,6 @@ public class SceneManager {
     public Scene getCurrentScene() {
         return currentScene;
     }
-
-    // Other methods related to scene management can be added here
 
     // Method to resume the game from a paused state
     public void resumeGame() {

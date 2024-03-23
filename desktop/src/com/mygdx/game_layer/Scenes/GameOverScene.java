@@ -1,7 +1,6 @@
 package com.mygdx.game_layer.Scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,12 +14,11 @@ import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
 
 public class GameOverScene extends Scene{
-    private EntityManager entityManager;
     private SceneManager sceneManager;
     private Stage stage;
     private Skin skin;
-
     private BitmapFont font;
+
     public GameOverScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/gameOver.jpg", entityManager, sceneManager);
 
@@ -74,13 +72,10 @@ public class GameOverScene extends Scene{
         super.render(batch);
         batch.end(); // End the sprite batch before drawing the stage
 
-        // Draw the buttons on top
         stage.getViewport().apply(); // Apply the stage's viewport
         stage.draw();
 
         batch.begin();
-//        font.draw(batch, "Highest Score: " + score.getHighScore(), 125, 450);
-//        batch.end();
     }
     public void dispose() {
         // Dispose of the background texture and other resources managed by the superclass

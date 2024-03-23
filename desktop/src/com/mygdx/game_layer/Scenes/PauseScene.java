@@ -8,17 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
-import com.mygdx.game_engine.Managers.GameManager;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game_layer.Objects.HealthyFoodItem;
-
 
 class PauseScene extends Scene{
     private SceneManager sceneManager;
     private Stage stage;
     private Skin skin;
-    private Music music;
+
     public PauseScene(EntityManager entityManager, SceneManager sceneManager)
     {
         super("Scenes/pausebg.jpg", entityManager, sceneManager);

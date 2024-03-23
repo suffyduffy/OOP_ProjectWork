@@ -2,16 +2,9 @@ package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game_engine.Interface.ControlledEntity;
 import com.mygdx.game_layer.Objects.Entities;
-import com.mygdx.game_layer.Objects.HealthyFoodItem;
 import com.mygdx.game_layer.Objects.TexturedObject;
-import com.mygdx.game_layer.Objects.UnhealthyFoodItem;
-
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class AIControlManager {
@@ -24,7 +17,6 @@ public class AIControlManager {
 
     public AIControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
-        // Rest of the constructor...
     }
 
     public void updateEntityManagement(float deltaTime) {
@@ -45,7 +37,6 @@ public class AIControlManager {
                 timeSinceLastEntity = 0f;
             } else {
                 // If there are no more entities to activate, reset the index to loop back
-                // if looping is desired behavior, or handle the end of activation as needed
                 nextEntityIndex = 0; // or handle the end of the list appropriately
             }
         }

@@ -2,12 +2,10 @@ package com.mygdx.game_engine.Managers;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game_layer.Objects.*;
 import com.mygdx.game_layer.Scenes.GameOverScene;
 import com.mygdx.game_layer.Scenes.MenuScene;
 import com.mygdx.game_layer.Scenes.Scene;
@@ -25,22 +23,18 @@ public class GameManager extends Game {
     private SceneManager sceneManager;
     private InputOutputManager inputOutputManager;
     private SpriteBatch batch;
-    private Music music;
     private Timer gameTimer; // New timer field
-
     private Score score;
-
     Texture fitManTexture;
     Texture skinnyManTexture;
     Texture fatManTexture;
-
     Vector2 playerPosition;
     boolean isSkinny = false;
     boolean isFat = false;
     boolean facingRight = true;
     float playerScaleX = 1.0f; // Default scale factor for width
     float playerScaleY = 1.0f; // Default scale factor for height
-    float timeCount = 20;
+    float timeCount = 30; // Default game time
     private BitmapFont font; // Font for text rendering
 
     @Override
@@ -68,8 +62,6 @@ public class GameManager extends Game {
         );
 
         entityManager.initializeFoodItems(); // This line initializes the food items
-
-        // Initialize the timer with 10 seconds
         gameTimer = new Timer(timeCount); // Adjust the initial time as needed
 
         // Initialize font
@@ -77,6 +69,7 @@ public class GameManager extends Game {
                 Gdx.files.internal("Skins/custom.png"), false);
         font.setColor(Color.BLACK);
 
+        // Initialize scoreboard
         score = new Score();
 
     }
@@ -84,9 +77,7 @@ public class GameManager extends Game {
     @Override
     public void render() {
         super.render();
-
         update(Gdx.graphics.getDeltaTime());
-
         batch.begin();
         Scene currentScene = sceneManager.getCurrentScene();
         if (currentScene != null) {
@@ -110,7 +101,7 @@ public class GameManager extends Game {
                     scaleY = 0.4f;
                 }
 
-                // Render the timer at the top right corner
+                // Render the timer
                 font.draw(batch, "Time: " + (int) gameTimer.getTimeRemaining(), Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() - 20);
 
                 //Render the scoreboard
@@ -118,8 +109,7 @@ public class GameManager extends Game {
 
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
-                    // Render "You Lose" text
-                    //font.draw(batch, "You Lose", Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2);
+                    // Change scene
                     GameOverScene gameOverScene = new GameOverScene(entityManager, sceneManager);
                     sceneManager.setCurrentScene(gameOverScene);
                     resetGameTime();
@@ -190,7 +180,6 @@ public class GameManager extends Game {
     }
 
     public void decreaseUnhealthyFoodEaten() {
-//        score.decreaseUnhealthyFoodEaten();
         this.gameTimer.minusTime(10); // Subtract 10 seconds to the timer
     }
 
@@ -205,10 +194,6 @@ public class GameManager extends Game {
         if (batch != null) {
             batch.dispose();
         }
-//        if (music != null) {
-//            music.dispose();
-//        }
-        // No need to dispose textures here as they are managed by EntityManager
     }
 
 }

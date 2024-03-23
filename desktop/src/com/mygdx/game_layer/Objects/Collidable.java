@@ -1,7 +1,6 @@
 package com.mygdx.game_layer.Objects;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game_layer.Objects.TexturedObject;
 import com.mygdx.game_engine.Interface.ControlledEntity;
 
 public class Collidable implements ControlledEntity {
