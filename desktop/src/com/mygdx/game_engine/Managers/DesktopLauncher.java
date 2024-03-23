@@ -9,6 +9,8 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		// Set up LWJGL3 configurations
 		config.setTitle("HealthyEating");
+		config.setForegroundFPS(60);
+		config.setWindowIcon("Icon.png");
 		config.setWindowedMode(800, 600); // Set your desired width and height
 		new Lwjgl3Application(new GameManager(), config);
 	}

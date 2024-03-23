@@ -23,7 +23,7 @@ public class MenuScene extends Scene {
     private Timer timer;
     private Score score;
     public MenuScene(EntityManager entityManager, SceneManager sceneManager) {
-        super("Scenes/mainMenu.jpg", entityManager, sceneManager);
+        super("Scenes/mainMenu2.jpg", entityManager, sceneManager);
         this.stage = new Stage();
         this.sceneManager = sceneManager;
         //sceneManager = new SceneManager();
