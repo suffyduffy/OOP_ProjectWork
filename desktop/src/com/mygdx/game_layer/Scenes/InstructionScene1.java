@@ -22,8 +22,7 @@ public class InstructionScene1 extends Scene{
         super("Scenes/IS1.jpg",entityManager, sceneManager);
         this.stage = new Stage();
         this.sceneManager = sceneManager;
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/Mamak.mp3"));
-        this.music.setLooping(true);
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/instruction.mp3"));
         this.music.play();
         Gdx.input.setInputProcessor(this.stage);
 
@@ -39,10 +38,10 @@ public class InstructionScene1 extends Scene{
             public void clicked(InputEvent event, float x, float y) {
                 InstructionScene2 instructionScene2 = new InstructionScene2(entityManager, sceneManager);
                 sceneManager.setCurrentScene(instructionScene2); // This is the likely correct method name
-                /*if (music != null) {
+                if (music != null) {
                     music.stop();
                     music.dispose();
-                }*/
+                }
             }
         });
 

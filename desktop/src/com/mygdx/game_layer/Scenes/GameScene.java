@@ -19,6 +19,10 @@ public class GameScene extends Scene {
         this.sceneManager = sceneManager;
         Gdx.app.log("GameScene", "Constructor called");
 
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameScene.mp3"));
+        this.music.setLooping(true);
+        this.music.play();
+
     }
 
     @Override
@@ -47,6 +51,7 @@ public class GameScene extends Scene {
             // Place rendering logic for entities here
             entityManager.renderEntitiesWithScaling(batch);
             entityManager.setRenderEntities(true);
+            music.play();
 
         }
 
@@ -55,6 +60,7 @@ public class GameScene extends Scene {
             Gdx.app.log("GameScene", "Attempting to switch to PauseScene");
             isPaused = true;
             switchToPauseScene();
+            music.pause();
         }
     }
 

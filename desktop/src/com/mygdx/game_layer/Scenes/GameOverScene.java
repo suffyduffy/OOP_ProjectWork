@@ -3,6 +3,7 @@ package com.mygdx.game_layer.Scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,6 +19,7 @@ public class GameOverScene extends Scene{
     private Stage stage;
     private Skin skin;
     private BitmapFont font;
+    private Music music;
 
     public GameOverScene(EntityManager entityManager, SceneManager sceneManager) {
         super("Scenes/gameOver.jpg", entityManager, sceneManager);
@@ -25,11 +27,11 @@ public class GameOverScene extends Scene{
         this.sceneManager = sceneManager;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameOver2.mp3"));
+        this.music.setLooping(true);
+        this.music.play();
 
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
-
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
 
         TextButton menu = new TextButton("Restart", skin);
         menu.setPosition(125, 350); // Set button position
@@ -39,11 +41,13 @@ public class GameOverScene extends Scene{
             public void clicked(InputEvent event, float x, float y) {
                 // Handle button 1 click event
                 Gdx.app.log("Menu Scene", "Clicked");
-                if (sceneManager != null) {
-                    InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
-                    sceneManager.setCurrentScene(instructionScene1);
-
+                InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
+                sceneManager.setCurrentScene(instructionScene1);
+                if (music != null) {
+                    music.stop();
+                    music.dispose();
                 }
+
             }
         });
 

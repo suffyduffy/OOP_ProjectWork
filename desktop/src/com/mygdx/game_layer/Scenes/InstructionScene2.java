@@ -24,6 +24,8 @@ public class InstructionScene2 extends Scene{
         this.stage = new Stage();
         this.sceneManager = sceneManager;
         Gdx.input.setInputProcessor(this.stage);
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/instruction.mp3"));
+        this.music.play();
 
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
@@ -36,6 +38,10 @@ public class InstructionScene2 extends Scene{
             public void clicked(InputEvent event, float x, float y) {
                 GameScene gameScene = new GameScene(entityManager, sceneManager);
                 sceneManager.setCurrentScene(gameScene);
+                if (music != null) {
+                    music.stop();
+                    music.dispose();
+                }
             }
         });
 
