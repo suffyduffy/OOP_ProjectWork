@@ -23,9 +23,18 @@ public class MenuScene extends Scene {
         this.sceneManager = sceneManager;
         //sceneManager = new SceneManager();
         Gdx.input.setInputProcessor(this.stage); // Set the stage as the input processor
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/mainMenu.mp3"));
-        this.music.setLooping(true);
-        this.music.play();
+        if (music != null)
+        {
+            music.dispose();
+
+        }
+        else
+        {
+            this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameScene.mp3"));
+            this.music.setLooping(true);
+            this.music.play();
+        }
+
         // Load skin
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
@@ -45,10 +54,10 @@ public class MenuScene extends Scene {
                     sceneManager.setCurrentScene(gameScene);*/
                     InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
                     sceneManager.setCurrentScene(instructionScene1);
-                    if (music != null) {
+                    /*if (music != null) {
                         music.stop();
                         music.dispose();
-                    }
+                    }*/
                 }
             }
         });

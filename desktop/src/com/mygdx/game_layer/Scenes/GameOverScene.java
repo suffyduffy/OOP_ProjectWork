@@ -27,8 +27,9 @@ public class GameOverScene extends Scene{
         this.sceneManager = sceneManager;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameOver2.mp3"));
-        this.music.setLooping(true);
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameOver.mp3"));
+        this.music.setVolume(1);
+        this.music.setLooping(false);
         this.music.play();
 
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));

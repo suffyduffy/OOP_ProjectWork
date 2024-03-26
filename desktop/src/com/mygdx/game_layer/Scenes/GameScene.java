@@ -19,9 +19,9 @@ public class GameScene extends Scene {
         this.sceneManager = sceneManager;
         Gdx.app.log("GameScene", "Constructor called");
 
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameScene.mp3"));
+        /*this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameScene.mp3"));
         this.music.setLooping(true);
-        this.music.play();
+        this.music.play();*/
 
     }
 
@@ -51,7 +51,7 @@ public class GameScene extends Scene {
             // Place rendering logic for entities here
             entityManager.renderEntitiesWithScaling(batch);
             entityManager.setRenderEntities(true);
-            music.play();
+            //music.play();
 
         }
 
@@ -60,7 +60,7 @@ public class GameScene extends Scene {
             Gdx.app.log("GameScene", "Attempting to switch to PauseScene");
             isPaused = true;
             switchToPauseScene();
-            music.pause();
+            //music.pause();
         }
     }
 
@@ -74,9 +74,9 @@ public class GameScene extends Scene {
         // Dispose of the background texture and other resources managed by the superclass
         super.dispose();
         // Dispose of the music
-        if (music != null) {
+        /*if (music != null) {
             music.stop();
             music.dispose();
-        }
+        }*/
     }
 }

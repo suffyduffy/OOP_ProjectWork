@@ -10,7 +10,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class AIControlManager {
     // Implement ControlledEntity methods here
     public float timeSinceLastEntity = 0f;
-    public float timeBetweenEntities = 2f;
+    public float timeBetweenEntities = 0.5f;
     public int nextEntityIndex = 0;
 
     private EntityManager entityManager;
@@ -48,7 +48,7 @@ public class AIControlManager {
             Entities entity = iterator.next();
             for (TexturedObject texturedObject : entity.getTexturedObjects()) {
                 // Make the food fall down by decreasing the y position
-                texturedObject.getPosition().y -= 60 * deltaTime;
+                texturedObject.getPosition().y -= 300 * deltaTime;
 
                 // Reset the position to the top once it reaches the bottom
                 if (texturedObject.getPosition().y < 0) {
