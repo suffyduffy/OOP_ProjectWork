@@ -43,9 +43,6 @@ If you wish to manually import the files, you will need to include the libGDX li
 
 
 ## Asset Citations:
-- [Astronaut Scene pixel background](https://rare-gallery.com/1034139-illustration-pixel-art-planet-space-stars-cartoon-hills-helmet-fire-astronaut-pixels-spacesuit-8-bit.html)
-- [Rick & Morty pixel spaceship](https://www.vhv.rs/viewpic/hbRbJTh_rick-and-morty-spaceship-sprite-pixel-art-spaceships/)
-- [Background Music](https://500audio.com/track/new-epic_22682)
-- [Collision Music](https://www.myinstants.com/en/instant/street-fighter-k-o-97268/)
 
+Assets were obtained via ChatGPT 4.0 prompts.
 
