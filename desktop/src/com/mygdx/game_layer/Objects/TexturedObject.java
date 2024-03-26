@@ -28,12 +28,6 @@ public class TexturedObject {
         this.position.set(x, y);
     }
 
-    // Method to get the texture file name
-    public String getTextureName() {
-        // Assuming texturePath is the full path, extract the file name
-        return new File(texturePath).getName();
-    }
-
     public void dispose() {
         if (texture != null) {
             texture.dispose();

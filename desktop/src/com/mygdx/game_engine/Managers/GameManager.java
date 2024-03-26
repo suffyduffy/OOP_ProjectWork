@@ -34,7 +34,7 @@ public class GameManager extends Game {
     boolean facingRight = true;
     float playerScaleX = 1.0f; // Default scale factor for width
     float playerScaleY = 1.0f; // Default scale factor for height
-    float timeCount = 30; // Default game time
+    float timeCount = 31; // Default game time
     private BitmapFont font; // Font for text rendering
 
     @Override

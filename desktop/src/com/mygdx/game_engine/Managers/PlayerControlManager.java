@@ -16,22 +16,6 @@ public class PlayerControlManager {
         this.inputOutputManager = inputOutputManager;
     }
 
-    public InputOutputManager getInputOutputManager() {
-        return inputOutputManager;
-    }
-
-    public void setInputOutputManager(InputOutputManager inputOutputManager) {
-        this.inputOutputManager = inputOutputManager;
-    }
-
-    public TexturedObject getTexturedObject() {
-        return texturedObject;
-    }
-
-    public void setTexturedObject(TexturedObject texturedObject) {
-        this.texturedObject = texturedObject;
-    }
-
     void handlePlayerMovement(float deltaTime, GameManager gameManager) {
         float playerSpeed = gameManager.isSkinny ? 300f : (gameManager.isFat ? 100f : 200f); // Adjust speed based on player state
         float playerWidth = gameManager.fitManTexture.getWidth() * gameManager.playerScaleX;
