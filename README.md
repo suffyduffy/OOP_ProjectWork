@@ -9,7 +9,7 @@ In part 1, our requirements included exhibited game engine implementation, showc
 
 ## UML Diagram:
 
-![image](![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/10e2fd6c-15e1-49bd-af52-7debc5af6b07))
+![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/10e2fd6c-15e1-49bd-af52-7debc5af6b07))
 <br><br>
 
 
@@ -22,14 +22,14 @@ If you wish to manually import the files, you will need to include the libGDX li
 2. When you the man eats healthy food he becomes chad and when he eats unhealthy food, he become fat. Your healthy food score and time remaining will increase when the man eats healthy food. But ONLY the time remaining will decrease when he eats unhealthy food
 3. You may press P during the gameplay to reach the pause screen if necessary
 
-![image](![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/08ad1d51-880f-4f97-b0d9-c1af8ce44033)
-)
+![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/08ad1d51-880f-4f97-b0d9-c1af8ce44033)
 
-![image](![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/85c13224-e3a5-4704-ab00-8be3c4328a9a)
-)
 
-![image](![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/ac69ca8a-d54e-43f8-b0db-be0d613b8431)
-)<br><br>
+![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/85c13224-e3a5-4704-ab00-8be3c4328a9a)
+
+
+![image](https://github.com/suffyduffy/OOP_ProjectWork/assets/161730857/ac69ca8a-d54e-43f8-b0db-be0d613b8431)
+<br><br>
 
 
 ## Contributors:
