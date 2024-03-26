@@ -22,7 +22,8 @@ public class GameOverScene extends Scene{
     private Skin skin;
     private BitmapFont font;
     private Music music;
-    private Score score;
+    private
+    Score score;
     public GameOverScene(EntityManager entityManager, SceneManager sceneManager, Score score ) {
         super("Scenes/gameOver.jpg", entityManager, sceneManager);
         this.score = score;
@@ -37,14 +38,14 @@ public class GameOverScene extends Scene{
 
         this.skin = new Skin(Gdx.files.internal("skins/comic-ui.json"));
 
-        TextButton menu = new TextButton("Restart", skin);
-        menu.setPosition(125, 350); // Set button position
-        menu.setSize(200, 50); // Set button size
-        menu.addListener(new ClickListener() {
+        TextButton restart = new TextButton("Restart", skin);
+        restart.setPosition(125, 350); // Set button position
+        restart.setSize(200, 50); // Set button size
+        restart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Handle button 1 click event
-                Gdx.app.log("Menu Scene", "Clicked");
+                Gdx.app.log("restart Scene", "Clicked");
                 InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
                 sceneManager.setCurrentScene(instructionScene1);
 
@@ -62,9 +63,13 @@ public class GameOverScene extends Scene{
                 Gdx.app.exit();
             }
         });
-        stage.addActor(menu);
+        stage.addActor(restart);
         stage.addActor(quit);
 
+        // Initialize your custom font here
+        font = new BitmapFont(Gdx.files.internal("Skins/custom.fnt"));
+        font.setColor(Color.BLACK); // You can set the color as needed
+        font.getData().setScale(1.5f);
     }
 
     @Override
@@ -77,12 +82,9 @@ public class GameOverScene extends Scene{
         batch.end(); // End the sprite batch before drawing the stage
         // Draw the score
         batch.begin(); // Begin batch to draw text
-        if (font == null) {
-            font = new BitmapFont(); // Or use your custom font as needed
-            font.setColor(Color.WHITE); // Set the font color
+        if (font != null) {
+            font.draw(batch, "Final Score: " + score.getHealthyFoodEaten(), 300, 500); // Adjust position as needed
         }
-        font.draw(batch, "Final Score: " + score.getHealthyFoodEaten(), 350, 500); // Position as needed
-
         batch.end(); // End the sprite batch after drawing text
         stage.getViewport().apply(); // Apply the stage's viewport
         stage.draw();
