@@ -10,7 +10,6 @@ import com.badlogic.gdx.Input.Keys;
 public class GameScene extends Scene {
     private EntityManager entityManager;
     private SceneManager sceneManager;
-    private Music music;
     private boolean isPaused;
 
     public GameScene(EntityManager entityManager, SceneManager sceneManager) {
@@ -18,10 +17,6 @@ public class GameScene extends Scene {
         this.entityManager = entityManager;
         this.sceneManager = sceneManager;
         Gdx.app.log("GameScene", "Constructor called");
-
-        /*this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameScene.mp3"));
-        this.music.setLooping(true);
-        this.music.play();*/
 
     }
 
@@ -33,7 +28,6 @@ public class GameScene extends Scene {
     }
 
     private void switchToPauseScene() {
-        //isPaused = true;  // Set the game to paused
 
         if (isPaused = true)
         {
@@ -51,16 +45,15 @@ public class GameScene extends Scene {
             // Place rendering logic for entities here
             entityManager.renderEntitiesWithScaling(batch);
             entityManager.setRenderEntities(true);
-            //music.play();
 
         }
+
 
         // The conditional check for entering the pause scene
         if (Gdx.input.isKeyPressed(Keys.P) && !isPaused) {
             Gdx.app.log("GameScene", "Attempting to switch to PauseScene");
             isPaused = true;
             switchToPauseScene();
-            //music.pause();
         }
     }
 
@@ -73,10 +66,5 @@ public class GameScene extends Scene {
     public void dispose() {
         // Dispose of the background texture and other resources managed by the superclass
         super.dispose();
-        // Dispose of the music
-        /*if (music != null) {
-            music.stop();
-            music.dispose();
-        }*/
     }
 }

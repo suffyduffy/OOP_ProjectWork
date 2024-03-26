@@ -15,7 +15,6 @@ public class InstructionScene1 extends Scene{
     private Stage stage;
     private Skin skin;
     private SceneManager sceneManager;
-    private Music music;
     private TextButton nextBtn;
     public InstructionScene1(EntityManager entityManager,SceneManager sceneManager)
     {

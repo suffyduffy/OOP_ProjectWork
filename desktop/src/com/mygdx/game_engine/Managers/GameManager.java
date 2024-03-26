@@ -110,7 +110,7 @@ public class GameManager extends Game {
                 // Check if time is up
                 if (gameTimer.getTimeRemaining() <= 0) {
                     // Change scene
-                    GameOverScene gameOverScene = new GameOverScene(entityManager, sceneManager);
+                    GameOverScene gameOverScene = new GameOverScene(entityManager, sceneManager, score);
                     sceneManager.setCurrentScene(gameOverScene);
                     resetGame();
                 }

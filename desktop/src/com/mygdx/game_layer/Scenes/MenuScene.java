@@ -21,7 +21,6 @@ public class MenuScene extends Scene {
         super("Scenes/mainMenu2.jpg", entityManager, sceneManager);
         this.stage = new Stage();
         this.sceneManager = sceneManager;
-        //sceneManager = new SceneManager();
         Gdx.input.setInputProcessor(this.stage); // Set the stage as the input processor
         if (music != null)
         {
@@ -50,14 +49,8 @@ public class MenuScene extends Scene {
                 // Handle button 1 click event
                 Gdx.app.log("Start Game", "Clicked");
                 if (sceneManager != null) {
-                    /*GameScene gameScene = new GameScene(entityManager, sceneManager);
-                    sceneManager.setCurrentScene(gameScene);*/
                     InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
                     sceneManager.setCurrentScene(instructionScene1);
-                    /*if (music != null) {
-                        music.stop();
-                        music.dispose();
-                    }*/
                 }
             }
         });

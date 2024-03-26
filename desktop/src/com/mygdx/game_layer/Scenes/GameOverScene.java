@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game_engine.Managers.EntityManager;
 import com.mygdx.game_engine.Managers.SceneManager;
+import com.mygdx.game_layer.Utils.Score;
+
 
 public class GameOverScene extends Scene{
     private SceneManager sceneManager;
@@ -20,15 +22,15 @@ public class GameOverScene extends Scene{
     private Skin skin;
     private BitmapFont font;
     private Music music;
-
-    public GameOverScene(EntityManager entityManager, SceneManager sceneManager) {
+    private Score score;
+    public GameOverScene(EntityManager entityManager, SceneManager sceneManager, Score score ) {
         super("Scenes/gameOver.jpg", entityManager, sceneManager);
-
+        this.score = score;
         this.sceneManager = sceneManager;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
         this.music = Gdx.audio.newMusic(Gdx.files.internal("Music/gameOver.mp3"));
-        this.music.setVolume(1);
         this.music.setLooping(false);
         this.music.play();
 
@@ -44,10 +46,6 @@ public class GameOverScene extends Scene{
                 Gdx.app.log("Menu Scene", "Clicked");
                 InstructionScene1 instructionScene1 = new InstructionScene1(entityManager, sceneManager);
                 sceneManager.setCurrentScene(instructionScene1);
-                if (music != null) {
-                    music.stop();
-                    music.dispose();
-                }
 
             }
         });
@@ -76,7 +74,15 @@ public class GameOverScene extends Scene{
     public void render(SpriteBatch batch) {
         super.render(batch);
         batch.end(); // End the sprite batch before drawing the stage
+        // Draw the score
+        batch.begin(); // Begin batch to draw text
+        if (font == null) {
+            font = new BitmapFont(); // Or use your custom font as needed
+            font.setColor(Color.WHITE); // Set the font color
+        }
+        font.draw(batch, "Final Score: " + score.getHealthyFoodEaten(), 100, 200); // Position as needed
 
+        batch.end(); // End the sprite batch after drawing text
         stage.getViewport().apply(); // Apply the stage's viewport
         stage.draw();
 
