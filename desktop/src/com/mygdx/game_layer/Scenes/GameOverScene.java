@@ -26,6 +26,7 @@ public class GameOverScene extends Scene{
     public GameOverScene(EntityManager entityManager, SceneManager sceneManager, Score score ) {
         super("Scenes/gameOver.jpg", entityManager, sceneManager);
         this.score = score;
+
         this.sceneManager = sceneManager;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -80,7 +81,7 @@ public class GameOverScene extends Scene{
             font = new BitmapFont(); // Or use your custom font as needed
             font.setColor(Color.WHITE); // Set the font color
         }
-        font.draw(batch, "Final Score: " + score.getHealthyFoodEaten(), 100, 200); // Position as needed
+        font.draw(batch, "Final Score: " + score.getHealthyFoodEaten(), 350, 500); // Position as needed
 
         batch.end(); // End the sprite batch after drawing text
         stage.getViewport().apply(); // Apply the stage's viewport
